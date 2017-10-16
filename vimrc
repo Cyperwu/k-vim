@@ -17,12 +17,14 @@
 "       -> Theme Settings  主题设置
 "
 "       -> 插件配置和具体设置在vimrc.bundles中
-" Note: Don't put anything in your .vimrc you don't understand!
 "==========================================
 
 "==========================================
 " Initial Plugin 加载插件
 "==========================================
+
+" autocmd! BufWritePost,BufEnter * Neomake
+" let g:neomake_verbose=2
 
 " 修改leader键
 let mapleader = ','
@@ -34,8 +36,6 @@ syntax on
 " install bundles
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
-elseif filereadable(expand("~/.config/nvim/vimrc.bundles")) " neovim
-  source ~/.config/nvim/vimrc.bundles
 endif
 
 " ensure ftdetect et al work by including this after the bundle stuff
@@ -47,6 +47,8 @@ filetype plugin indent on
 " General Settings 基础设置
 "==========================================
 
+" 设置80列代码宽 
+set colorcolumn=80
 
 " history存储容量
 set history=2000
@@ -207,11 +209,11 @@ set autoindent
 
 " tab相关变更
 " 设置Tab键的宽度        [等同的空格个数]
-set tabstop=4
+set tabstop=2
 " 每一次缩进对应的空格数
-set shiftwidth=4
-" 按退格键时可以一次删掉 4 个空格
-set softtabstop=4
+set shiftwidth=2
+" 按退格键时可以一次删掉 2 个空格
+set softtabstop=2
 " insert tabs on the start of a line according to shiftwidth, not tabstop 按退格键时可以一次删掉 4 个空格
 set smarttab
 " 将Tab自动转化成空格[需要输入真正的Tab键时，使用 Ctrl+V + Tab]
@@ -385,10 +387,10 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 
 " 分屏窗口移动, Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 
 " http://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
@@ -522,9 +524,6 @@ vnoremap <leader>y "+y
 " select all
 map <Leader>sa ggVG
 
-" 选中并高亮最后一次插入的内容
-nnoremap gv `[v`]
-
 " select block
 nnoremap <leader>v V`}
 
@@ -544,6 +543,9 @@ nnoremap <C-y> 2<C-y>
 "nmap t o<ESC>k
 "nmap T O<ESC>j
 
+map f <Nop>
+map f  <Plug>(easymotion-overwin-f)
+
 " Quickly close the current window
 nnoremap <leader>q :q<CR>
 
@@ -558,12 +560,8 @@ nnoremap ` '
 nnoremap U <C-r>
 
 " Quickly edit/reload the vimrc file
-" nmap <silent> <leader>ev :e $MYVIMRC<CR>
-" nmap <silent> <leader>sv :so $MYVIMRC<CR>
-" edit vimrc/zshrc and load vimrc bindings
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
-nnoremap <leader>ez :vsp ~/.zshrc<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 "==========================================
 " FileType Settings  文件类型设置
@@ -574,8 +572,6 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
 autocmd BufRead,BufNewFile *.part set filetype=html
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
-
 " disable showmatch when use > in php
 au BufWinEnter *.php set mps-=<:>
 
@@ -601,9 +597,8 @@ function! AutoSetFileHead()
 
     "如果文件类型为python
     if &filetype == 'python'
-        " call setline(1, "\#!/usr/bin/env python")
-        " call append(1, "\# encoding: utf-8")
-        call setline(1, "\# -*- coding: utf-8 -*-")
+        call setline(1, "\#!/usr/bin/env python")
+        call append(1, "\# encoding: utf-8")
     endif
 
     normal G
@@ -625,9 +620,28 @@ endif
 " TEMP 设置, 尚未确定要不要
 "==========================================
 
-" beta
-" https://dougblack.io/words/a-good-vimrc.html
-set lazyredraw          " redraw only when we need to.
+" tmux
+" function! WrapForTmux(s)
+"   if !exists('$TMUX')
+"     return a:s
+"   endif
+"
+"   let tmux_start = "\<Esc>Ptmux;"
+"   let tmux_end = "\<Esc>\\"
+"
+"   return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+" endfunction
+"
+" let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+" let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+" allows cursor change in tmux mode
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" if exists('$TMUX')
+    " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    " let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" endif
 
 
 "==========================================
@@ -657,8 +671,9 @@ endif
 set background=dark
 set t_Co=256
 
-colorscheme solarized
-" colorscheme molokai
+" colorscheme solarized
+colorscheme molokai
+" colorscheme desert
 
 
 " 设置标记一列的背景颜色和数字一行颜色一致
@@ -675,3 +690,16 @@ highlight clear SpellRare
 highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
+
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py '
+
+"=====================================
+"ctrlP
+"====================================
+
+let g:ctrlp_map = '<c-p>'
+
+"=====================================
+" easymotion
+"=====================================
