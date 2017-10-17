@@ -692,7 +692,7 @@ highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py '
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "=====================================
 "ctrlP

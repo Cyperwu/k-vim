@@ -238,7 +238,7 @@ if count(g:bundle_groups, 'javascript')
     " for javascript 自动补全, 配合YCM, 需要安装全局环境的（非nvm中) node.js&npm
     " 安装完成后还需要在 bundle/tern_for_vim 下执行 npm install 安装依赖
     " see https://github.com/marijnh/tern_for_vim
-    " Plug 'marijnh/tern_for_vim'
+    Plug 'marijnh/tern_for_vim'
 endif
 
 
@@ -399,7 +399,7 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_goto_buffer_command = 'horizontal-split'
 " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gd :YcmCompleter GetDoc<CR>
 
 " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
 " old version

@@ -1,0 +1,21 @@
+{
+  "libs": [
+    "browser",
+    "jquery"
+  ],
+  "loadEagerly": [
+    "important.js"
+  ],
+  "plugins": {
+    "threejs":{},
+    "node": {},
+    "node-express": {},
+    "requirejs": {
+      "baseURL": "./",
+      "paths": {}
+    },
+    "modules": {},
+    "node_resolve": {},
+    "requirejs": {}
+  }
+}
