@@ -41,13 +41,14 @@ endif
 " ensure ftdetect et al work by including this after the bundle stuff
 filetype plugin indent on
 
+
 " NOTE: 以下配置有详细说明，一些特性不喜欢可以直接注解掉
 
 "==========================================
 " General Settings 基础设置
 "==========================================
 
-" 设置80列代码宽 
+" 设置80列代码宽
 set colorcolumn=80
 
 " history存储容量
@@ -78,14 +79,14 @@ set nobackup
 set noswapfile
 
 
-" TODO: remove this, use gundo
+" todo: remove this, use gundo
 " create undo file
 " if has('persistent_undo')
-  " " How many undos
+  " " how many undos
   " set undolevels=1000
   " " number of lines to save for undo
   " set undoreload=10000
-  " " So is persistent undo ...
+  " " so is persistent undo ...
   " "set undofile
   " set noundofile
   " " set undodir=/tmp/vimundo/
@@ -94,10 +95,9 @@ set noswapfile
 set wildignore=*.swp,*.bak,*.pyc,*.class,.svn
 
 " 突出显示当前列
-set cursorcolumn
+set cursorcolumn!
 " 突出显示当前行
-set cursorline
-
+set cursorline!
 
 " 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
 " 好处：误删什么的，如果以前屏幕打开，可以找回
@@ -191,13 +191,13 @@ set foldlevel=99
 let g:FoldMethod = 0
 map <leader>zz :call ToggleFold()<cr>
 fun! ToggleFold()
-    if g:FoldMethod == 0
-        exe "normal! zM"
-        let g:FoldMethod = 1
-    else
-        exe "normal! zR"
-        let g:FoldMethod = 0
-    endif
+  if g:FoldMethod == 0
+    exe "normal! zM"
+    let g:FoldMethod = 1
+  else
+    exe "normal! zR"
+    let g:FoldMethod = 0
+  endif
 endfun
 
 " 缩进配置
@@ -396,15 +396,16 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 " http://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
+  if exists('t:zoomed') && t:zoomed
+    execute t:zoom_winrestcmd
+    let t:zoomed = 0
+  else
+    let t:zoom_winrestcmd = winrestcmd()
+    resize
+    vertical resize
+    let t:zoomed = 1
+  endif
+
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <Leader>z :ZoomToggle<CR>
@@ -590,20 +591,20 @@ autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,pe
 " 定义函数AutoSetFileHead，自动插入文件头
 autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
 function! AutoSetFileHead()
-    "如果文件类型为.sh文件
-    if &filetype == 'sh'
-        call setline(1, "\#!/bin/bash")
-    endif
+  "如果文件类型为.sh文件
+  if &filetype == 'sh'
+    call setline(1, "\#!/bin/bash")
+  endif
 
-    "如果文件类型为python
-    if &filetype == 'python'
-        call setline(1, "\#!/usr/bin/env python")
-        call append(1, "\# encoding: utf-8")
-    endif
+  "如果文件类型为python
+  if &filetype == 'python'
+    call setline(1, "\#!/usr/bin/env python")
+    call append(1, "\# encoding: utf-8")
+  endif
 
-    normal G
-    normal o
-    normal o
+  normal G
+  normal o
+  normal o
 endfunc
 
 
@@ -692,7 +693,7 @@ highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "=====================================
 "ctrlP
