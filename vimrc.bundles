@@ -419,11 +419,12 @@ call neomake#configure#automake('rw', 1000)
 " when switching/opening a JS buffer, set neomake's eslint path, and enable it as a maker
 " au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint_d')
 
-if findfile('.eslintrc', '.;') ==# ''
-    let g:neomake_javascript_enabled_makers = ['eslint']
-  else
-    let g:neomake_javascript_enabled_makers = ['jshint']
-  endif
+let g:neomake_logfile = '/tmp/neomake.log'
+" if findfile('.eslintrc', '.;') ==# ''
+  let g:neomake_javascript_enabled_makers = ['eslint']
+" else
+  " let g:neomake_javascript_enabled_makers = ['jshint']
+" endif
 " 这一个选项用来debug neomake
 " let g:neomake_verbose = 3
 " let g:neomake_list_height = 2
@@ -442,8 +443,24 @@ let g:neomake_warning_sign = {
 
 let g:neomake_error_sign = {
   \ 'text': '>>',
-  \ 'texthl': 'ErrorMsg',
+  \ 'texthl': 'Statement',
   \ }
+
+" TODO: 高亮错误位置，在当前配色下不好用，查不出啥办法，先关掉
+let g:neomake_highlight_columns = 0
+
+" hi SignColumn cterm=underline ctermfg=81 ctermbg=236
+" hi! SignColumn cterm=underline ctermfg=81 ctermbg=236
+" hi LineNr cterm=underline ctermfg=81 ctermbg=236
+" let ttt = neomake#utils#GetHighlight('SignColumn', 'bg')
+" echom(ttt)
+
+augroup my_neomake_signs
+  au!
+  autocmd ColorScheme *
+        \ hi NeomakeErrorSign ctermfg=white |
+        \ hi NeomakeWarningSign ctermfg=yellow
+augroup END
 
 
 " syntastic {{{
