@@ -317,11 +317,11 @@ call neomake#configure#automake('rw', 1000)
 " when switching/opening a JS buffer, set neomake's eslint path, and enable it as a maker
 " au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint_d')
 
-if findfile('.eslintrc', '.;') ==# ''
+" if findfile('.eslintrc', '.;') ==# ''
   let g:neomake_javascript_enabled_makers = ['eslint']
-else
-  let g:neomake_javascript_enabled_makers = ['jshint']
-endif
+" else
+  " let g:neomake_javascript_enabled_makers = ['jshint']
+" endif
 " 这一个选项用来debug neomake
 " let g:neomake_verbose = 3
 " let g:neomake_list_height = 2
@@ -472,7 +472,7 @@ let g:ycm_filetype_blacklist = {
 let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+let g:UltiSnipsSnippetDirectories  = [$HOME.'/.vim/UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 " 定义存放代码片段的文件夹 .vim/UltiSnips下，使用自定义和默认的，将会的到全局，有冲突的会提示
 " 进入对应filetype的snippets进行编辑
