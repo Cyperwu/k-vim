@@ -17,7 +17,7 @@ filetype off " required! turn off
 " inspired by spf13, 自定义需要的插件集合
 if !exists('g:bundle_groups')
     " let g:bundle_groups=['python', 'javascript', 'markdown', 'html', 'css', 'tmux', 'beta', 'json', 'nginx', 'golang', 'ruby', 'less', 'php', 'coffeescript']
-    let g:bundle_groups=['python', 'javascript', 'markdown', 'html', 'css', 'tmux', 'beta']
+    let g:bundle_groups=['python', 'javascript', 'markdown', 'html', 'css', 'tmux', 'beta', 'coffeescript']
 endif
 
 " ----------------------------------------------------------------------------
@@ -28,6 +28,9 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
+
+" unix shell 命令的vim封装
+Plug 'tpope/vim-eunuch'
 
 " jsDoc 用来写js文件的注释
 Plug 'heavenshell/vim-jsdoc'
@@ -172,6 +175,10 @@ Plug 'szw/vim-ctrlspace'
 " tagbar
 Plug 'majutsushi/tagbar'
 
+" LeaderF
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
+
 " text object
 " 支持自定义文本对象
 Plug 'kana/vim-textobj-user'
@@ -236,7 +243,10 @@ if count(g:bundle_groups, 'javascript')
 
     " TODO: jquery? for, remove or keep
     Plug 'othree/javascript-libraries-syntax.vim'
-    let g:used_javascript_libs = 'jquery,underscore,backbone'
+    let g:used_javascript_libs = 'react'
+
+    " js 代码格式化
+    Plug 'sbdchd/neoformat'
 
     " for javascript 自动补全, 配合YCM, 需要安装全局环境的（非nvm中) node.js&npm
     " 安装完成后还需要在 bundle/tern_for_vim 下执行 npm install 安装依赖
@@ -245,9 +255,7 @@ if count(g:bundle_groups, 'javascript')
 endif
 
 
-if count(g:bundle_groups, 'coffeescript')
-    Plug 'kchmck/vim-coffee-script'
-endif
+Plug 'kchmck/vim-coffee-script'
 
 if count(g:bundle_groups, 'json')
     " json
@@ -327,6 +335,7 @@ call neomake#configure#automake('rw', 1000)
 " let g:neomake_list_height = 2
 " let g:neomake_open_list = 2
 let g:neomake_javascript_eslint_exe = '/usr/local/bin/eslint_d'
+
 " let g:neomake_javascript_enabled_makers = ['eslint', 'jshint']
 autocmd! BufWritePost *.js silent! Neomake
 
@@ -429,6 +438,9 @@ nmap <silent> <Leader>en    <Plug>LocationNext
 " YouCompleteMe {{{
 "youcompleteme  默认tab  s-tab 和自动补全冲突
 "let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+let g:ycm_server_use_vim_stdout = 0
+let g:ycm_server_log_level = 'debug'
 let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 let g:ycm_key_list_previous_completion = ['<Up>']
@@ -443,9 +455,13 @@ let g:ycm_seed_identifiers_with_syntax=1
 "let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
 
 " 跳转到定义处, 分屏打开
-let g:ycm_goto_buffer_command = 'horizontal-split'
+" let g:ycm_goto_buffer_command = 'horizontal-split'
+" 本buffer打开
+let g:ycm_goto_buffer_command = 'same-buffer'
+
 " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
 nnoremap <leader>gd :YcmCompleter GetDoc<CR>
 
 " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
@@ -627,8 +643,8 @@ let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>f :CtrlPMRU<CR>
 let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/](\.(git|hg|svn|rvm))|(node_modules|dist)',
-            \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|png|gif|jpg|jpeg)$',
+            \ 'dir':  '\v[\/](\.(git|hg|svn|rvm))|(node_modules|dist|third_party|bin)',
+            \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|png|gif|jpg|jpeg|lock)$',
             \ }
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_match_window_bottom=1
@@ -952,5 +968,41 @@ let g:jsdoc_user_defined_tags = {
       \ '@author': 'Cyper',
       \ '@date': strftime('%Y-%m-%d'),
       \}
+
+" ######### tern_for_vim ########
+" 重命名变量
+nmap R :TernRename<cr>
+" ######### tpope/vim-eunuch ########
+" 重命名文件
+nmap <leader>R :call RenameFile()<cr>
+function! RenameFile()
+  let file_name = expand('%:t')
+  exe 'Rename  'input('Rename ', file_name)
+endfunction
+
+" LeaderF
+noremap <leader>t :LeaderfFunction!<cr>
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
+
+let g:Lf_NormalMap = {
+	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+	\ }
+
+
+" neoformat
+" 对应js使用prettier
+let g:neoformat_enabled_javascript = ['prettier']
+" 保存文件前自动格式化
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
+augroup END
 
 "------------------------------------------- end of configs --------------------------------------------

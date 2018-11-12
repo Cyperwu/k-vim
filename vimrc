@@ -23,8 +23,8 @@
 " Initial Plugin 加载插件
 "==========================================
 
-" autocmd! BufWritePost,BufEnter * Neomake
-" let g:neomake_verbose=2
+ autocmd! BufWritePost,BufEnter * Neomake
+ " let g:neomake_verbose=2
 
 " 修改leader键
 let mapleader = ','
@@ -34,9 +34,9 @@ let g:mapleader = ','
 syntax on
 
 " install bundles
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
+ if filereadable(expand("~/.vimrc.bundles"))
+   source ~/.vimrc.bundles
+ endif
 
 " ensure ftdetect et al work by including this after the bundle stuff
 filetype plugin indent on
@@ -431,7 +431,7 @@ cnoremap <C-e> <End>
 map <space> /
 " 进入搜索Use sane regexes"
 nnoremap / /\v
-vnoremap / /\v
+vnoremap / y/\v<c-r>"<cr>
 
 " Keep search pattern at the center of the screen.
 nnoremap <silent> n nzz
@@ -533,6 +533,9 @@ cmap w!! w !sudo tee >/dev/null %
 " kj 替换 Esc
 inoremap kj <Esc>
 
+" ctrl-d 向前删除一个字符
+inoremap <C-d> <Del>
+
 " 滚动Speed up scrolling of the viewport slightly
 nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
@@ -612,7 +615,7 @@ if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
   if v:version > 701
     autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
-    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
+    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\|EDIT\)')
   endif
 endif
 
