@@ -67,10 +67,14 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " 重启 :YcmRestartServer
 " Plug 'Valloric/YouCompleteMe'
 Plug 'valloric/youcompleteme'
+" Plug 'zxqfl/tabnine-vim'
 " 自动补全单引号，双引号等
 Plug 'Raimondi/delimitMate'
 " 自动补全html/xml标签
 Plug 'docunext/closetag.vim'
+
+" fast fold
+Plug 'Konfekt/FastFold'
 
 " neovim 自动补全
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -173,7 +177,7 @@ Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
 " ctrlspace
 Plug 'szw/vim-ctrlspace'
 " tagbar
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
 " LeaderF
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -238,8 +242,13 @@ endif
 if count(g:bundle_groups, 'javascript')
     " javascript
     " 注意: syntax这个插件要放前面
-    Plug 'othree/yajs.vim' | Plug 'pangloss/vim-javascript'
-    " Plug 'jelera/vim-javascript-syntax' | Plug 'pangloss/vim-javascript'
+    " Plug 'othree/yajs.vim'
+    " |
+    " Plug 'pangloss/vim-javascript'
+
+    Plug 'jelera/vim-javascript-syntax'
+    " |
+    " Plug 'pangloss/vim-javascript'
 
     " TODO: jquery? for, remove or keep
     Plug 'othree/javascript-libraries-syntax.vim'
@@ -825,53 +834,53 @@ hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=
 
 " 标签导航
 " tagbar {{{
-nmap <F9> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-" let g:tagbar_autoshowtag = 1
-" let g:tagbar_show_visibility = 1
-" for ruby
-let g:tagbar_type_ruby = {
-            \ 'kinds' : [
-            \ 'm:modules',
-            \ 'c:classes',
-            \ 'd:describes',
-            \ 'C:contexts',
-            \ 'f:methods',
-            \ 'F:singleton methods'
-            \ ]
-            \ }
+" nmap <F9> :TagbarToggle<CR>
+" let g:tagbar_autofocus = 1
+" " let g:tagbar_autoshowtag = 1
+" " let g:tagbar_show_visibility = 1
+" " for ruby
+" let g:tagbar_type_ruby = {
+            " \ 'kinds' : [
+            " \ 'm:modules',
+            " \ 'c:classes',
+            " \ 'd:describes',
+            " \ 'C:contexts',
+            " \ 'f:methods',
+            " \ 'F:singleton methods'
+            " \ ]
+            " \ }
 
 " go语言的tagbar配置
 " 1. install gotags 'go get -u github.com/jstemmer/gotags'
 " 2. make sure `gotags` in you shell PATH, you can call check it with `which gotags`
 " for gotags. work with tagbar
-let g:tagbar_type_go = {
-            \ 'ctagstype' : 'go',
-            \ 'kinds'     : [
-            \ 'p:package',
-            \ 'i:imports:1',
-            \ 'c:constants',
-            \ 'v:variables',
-            \ 't:types',
-            \ 'n:interfaces',
-            \ 'w:fields',
-            \ 'e:embedded',
-            \ 'm:methods',
-            \ 'r:constructor',
-            \ 'f:functions'
-            \ ],
-            \ 'sro' : '.',
-            \ 'kind2scope' : {
-            \ 't' : 'ctype',
-            \ 'n' : 'ntype'
-            \ },
-            \ 'scope2kind' : {
-            \ 'ctype' : 't',
-            \ 'ntype' : 'n'
-            \ },
-            \ 'ctagsbin'  : 'gotags',
-            \ 'ctagsargs' : '-sort -silent'
-            \ }
+" let g:tagbar_type_go = {
+            " \ 'ctagstype' : 'go',
+            " \ 'kinds'     : [
+            " \ 'p:package',
+            " \ 'i:imports:1',
+            " \ 'c:constants',
+            " \ 'v:variables',
+            " \ 't:types',
+            " \ 'n:interfaces',
+            " \ 'w:fields',
+            " \ 'e:embedded',
+            " \ 'm:methods',
+            " \ 'r:constructor',
+            " \ 'f:functions'
+            " \ ],
+            " \ 'sro' : '.',
+            " \ 'kind2scope' : {
+            " \ 't' : 'ctype',
+            " \ 'n' : 'ntype'
+            " \ },
+            " \ 'scope2kind' : {
+            " \ 'ctype' : 't',
+            " \ 'ntype' : 'n'
+            " \ },
+            " \ 'ctagsbin'  : 'gotags',
+            " \ 'ctagsargs' : '-sort -silent'
+            " \ }
 " }}}
 
 
@@ -929,7 +938,7 @@ let g:vim_json_syntax_conceal = 0
 " nginx {{{
 " }}}
 
-map <F7> :Ack -i 
+map <F7> :Ack -i
 
 "fzf
 " Mapping selecting mappings
@@ -1004,5 +1013,24 @@ augroup fmt
   autocmd!
   autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
 augroup END
+
+" FastFold
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+
+let g:markdown_folding = 1
+let g:tex_fold_enabled = 1
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:ruby_fold = 1
+let g:perl_fold = 1
+let g:perl_fold_blocks = 1
+let g:r_syntax_folding = 1
+let g:rust_fold = 1
+let g:php_folding = 1
 
 "------------------------------------------- end of configs --------------------------------------------

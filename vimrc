@@ -703,6 +703,9 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/
 
 let g:ctrlp_map = '<c-p>'
 
+" let g:python3_host_prog = '/usr/local/bin/python3'
+" let g:python2_host_prog = '/usr/bin/python2.7'
+
 "=====================================
 " easymotion
 "=====================================
