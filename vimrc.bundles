@@ -31,15 +31,15 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/wujiajie/.vim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/wujiajie/.vim/bundles')
-  call dein#begin('/Users/wujiajie/.vim/bundles')
+if dein#load_state('~/.vim/bundles')
+  call dein#begin('~/.vim/bundles')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/wujiajie/.vim/bundles/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   call dein#add('Shougo/neosnippet.vim')
@@ -81,8 +81,6 @@ call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
 " auto complete
 " 代码自动补全
-" 迄今为止用到的最好的自动VIM自动补全插件
-" 重启 :YcmRestartServer
  call dein#add('zxqfl/tabnine-vim', {'build': './install.sh'})
  call dein#add('Shougo/deoplete.nvim')
  call dein#add('ervandew/supertab')
@@ -250,15 +248,18 @@ if count(g:bundle_groups, 'ruby')
     " call dein#add('tpope/vim-endwise')
 endif
 
-if count(g:bundle_groups, 'javascript')
+" if count(g:bundle_groups, 'javascript')
   " javascript
   " 注意: syntax这个插件要放前面
-  call dein#add('othree/yajs.vim') | call dein#add('pangloss/vim-javascript')
+  call dein#add('othree/yajs.vim')
+  " call dein#add('sheerun/vim-polyglot')
+  " |
+  " call dein#add('pangloss/vim-javascript')
   call dein#add('polpo/vim-html-js-indent')
-  " call dein#add('jelera/vim-javascript-syntax') | call dein#add('pangloss/vim-javascript')
+  " call dein#add('jelera/vim-javascript-syntax')
 
   " TODO: jquery? for, remove or keep
-  call dein#add('othree/javascript-libraries-syntax.vim')
+  " call dein#add('othree/javascript-libraries-syntax.vim')
   let g:used_javascript_libs = 'jquery,underscore,vue,react'
 
   " js 代码格式化
@@ -269,7 +270,7 @@ if count(g:bundle_groups, 'javascript')
   " see https://github.com/marijnh/tern_for_vim
   call dein#add('ternjs/tern_for_vim')
   call dein#add('carlitux/deoplete-ternjs')
-endif
+" endif
 
 
 if count(g:bundle_groups, 'coffeescript')
@@ -318,9 +319,6 @@ if count(g:bundle_groups, 'beta')
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
 
 endif
-
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
 
   " Required:
   call dein#end()
@@ -394,7 +392,7 @@ call neomake#configure#automake('rw', 1000)
 
 let g:neomake_logfile = '/tmp/neomake.log'
 " if findfile('.eslintrc', '.;') ==# ''
-  let g:neomake_javascript_enabled_makers = ['eslint']
+  let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
 " else
   " let g:neomake_javascript_enabled_makers = ['jshint']
 " endif
@@ -420,7 +418,7 @@ let g:neomake_error_sign = {
   \ }
 
 " TODO: 高亮错误位置，在当前配色下不好用，查不出啥办法，先关掉
-let g:neomake_highlight_columns = 0
+let g:neomake_highlight_columns = 1
 
 " hi SignColumn cterm=underline ctermfg=81 ctermbg=236
 " hi! SignColumn cterm=underline ctermfg=81 ctermbg=236
@@ -434,57 +432,6 @@ augroup my_neomake_signs
         \ hi NeomakeErrorSign ctermfg=white |
         \ hi NeomakeWarningSign ctermfg=yellow
 augroup END
-
-
-" syntastic {{{
-" dependence
-" 1. shellcheck `brew install shellcheck` https://github.com/koalaman/shellcheck
-
-" let g:syntastic_error_symbol='>>'
-" let g:syntastic_warning_symbol='>'
-" let g:syntastic_style_error_symbol = '†'
-" let g:syntastic_style_warning_symbol = '∆'
-" let g:syntastic_check_on_open=0
-" let g:syntastic_check_on_wq=1
-" let g:syntastic_enable_highlighting=1
-
-" checkers
-" 最轻量
-" let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes
-" 中等
-" error code: http://pep8.readthedocs.org/en/latest/intro.html#error-codes
-" let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用pyflakes,速度比pylint快
-" let g:syntastic_python_pep8_args='--ignore=E501,E225,E124,E712'
-" 重量级, 但是足够强大, 定制完成后相当个性化
-" pylint codes: http://pylint-messages.wikidot.com/all-codes
-" let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用pyflakes,速度比pylint快
-" let g:syntastic_python_checkers=['pylint'] " 使用pyflakes,速度比pylint快
-" let g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
-
-" if js
- " let g:syntastic_javascript_checkers = ['jsl', 'jshint']
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_eslint_exec = '/usr/local/bin/eslint'
-" let g:syntastic_javascript_jscs_exec = '/usr/local/bin/jscs'
-" let g:syntastic_html_checkers=['tidy', 'jshint']
-
-
-" to see error location list
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_enable_signs = 1
-" let g:syntastic_auto_loc_list = 0
-" let g:syntastic_auto_jump = 0
-" let g:syntastic_loc_list_height = 5
-
-" function! ToggleErrors()
-    " let old_last_winnr = winnr('$')
-    " lclose
-    " if old_last_winnr == winnr('$')
-        " " Nothing was closed, open syntastic_error location panel
-        " Errors
-    " endif
-" endfunction
-" nnoremap <Leader>s :call ToggleErrors()<cr>
 
 " ,en ,ep to jump between errors
 function! <SID>LocationPrevious()
@@ -1010,6 +957,7 @@ let g:jsdoc_user_defined_tags = {
 " ######### tern_for_vim ########
 " 重命名变量
 nmap R :TernRename<cr>
+nmap <leader>jd :TernDef<cr>
 " ######### tpope/vim-eunuch ########
 " 重命名文件
 nmap <leader>R :call RenameFile()<cr>

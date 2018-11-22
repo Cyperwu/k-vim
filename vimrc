@@ -79,6 +79,8 @@ set nobackup
 set noswapfile
 
 
+
+
 " todo: remove this, use gundo
 " create undo file
 " if has('persistent_undo')
@@ -225,6 +227,8 @@ set shiftround
 set hidden
 set wildmode=list:longest
 set ttyfast
+set re=1
+set lazyredraw
 
 " 00x增减数字时使用十进制
 set nrformats=
