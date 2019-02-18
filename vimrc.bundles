@@ -81,7 +81,8 @@ call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
 " auto complete
 " 代码自动补全
- call dein#add('zxqfl/tabnine-vim', {'build': './install.sh'})
+ " call dein#add('zxqfl/tabnine-vim', {'build': './install.sh'})
+ call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'})
  call dein#add('Shougo/deoplete.nvim')
  call dein#add('ervandew/supertab')
 
@@ -171,7 +172,7 @@ call dein#add('sjl/gundo.vim')
 " view
 " airline
 " 状态栏增强展示
-call dein#add('vim-airline/vim-airline')
+" call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 " rainbow_parentheses
 " 括号显示增强
@@ -251,7 +252,7 @@ endif
 " if count(g:bundle_groups, 'javascript')
   " javascript
   " 注意: syntax这个插件要放前面
-  call dein#add('othree/yajs.vim')
+	call dein#add('othree/yajs.vim')
   " call dein#add('sheerun/vim-polyglot')
   " |
   " call dein#add('pangloss/vim-javascript')
@@ -339,7 +340,24 @@ syntax enable
 " ################### 基础 ######################
 
 " --------- 自动补全
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/tern'
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#ternjs#timeout = 1
+
+" Whether to include the types of the completions in the result data. Default: 0
+let g:deoplete#sources#ternjs#types = 1
+
+" Whether to include the distance (in scopes for variables, in prototypes for 
+" properties) between the completions and the origin position in the result 
+" data. Default: 0
+let g:deoplete#sources#ternjs#depths = 1
+
+" Whether to include documentation strings (if found) in the result data.
+" Default: 0
+let g:deoplete#sources#ternjs#docs = 1
+
 
 " deoplete触发补全时使用的命令
 " 这里对应js，其它语言另给一个key
@@ -359,10 +377,6 @@ let g:tern#arguments = ['--persistent']
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:UltiSnipsExpandTrigger="<C-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#depths = 1
-let g:deoplete#sources#ternjs#docs = 1
 
 let g:deoplete#sources#ternjs#filetypes = [
                 \ 'jsx',
@@ -392,7 +406,7 @@ call neomake#configure#automake('rw', 1000)
 
 let g:neomake_logfile = '/tmp/neomake.log'
 " if findfile('.eslintrc', '.;') ==# ''
-  let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
+  let g:neomake_javascript_enabled_makers = ['eslint']
 " else
   " let g:neomake_javascript_enabled_makers = ['jshint']
 " endif
@@ -720,7 +734,7 @@ let g:airline_right_alt_sep = '❮'
 let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
 " 是否打开tabline
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 " }}}
 
 
@@ -988,7 +1002,7 @@ let g:neoformat_enabled_javascript = ['prettier']
 " 保存文件前自动格式化
 augroup fmt
   autocmd!
-  autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
+  autocmd BufWritePre *.js try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
 augroup END
 
 " FastFold
@@ -1010,4 +1024,71 @@ let g:r_syntax_folding = 1
 let g:rust_fold = 1
 let g:php_folding = 1
 
+" Press \r to start rotating lines and <C-c> (Control+c) to stop.
+
+function! s:RotateString(string)
+    let split_string = split(a:string, '\zs')
+    return join(split_string[-1:] + split_string[:-2], '')
+endfunction
+
+function! s:RotateLine(line, leading_whitespace, trailing_whitespace)
+    return substitute(
+        \ a:line,
+        \ '^\(' . a:leading_whitespace . '\)\(.\{-}\)\(' . a:trailing_whitespace . '\)$',
+        \ '\=submatch(1) . <SID>RotateString(submatch(2)) . submatch(3)',
+        \ ''
+    \ )
+endfunction
+
+function! s:RotateLines()
+    let saved_view = winsaveview()
+    let first_visible_line = line('w0')
+    let last_visible_line = line('w$')
+    let lines = getline(first_visible_line, last_visible_line)
+    let leading_whitespace = map(
+        \ range(len(lines)),
+        \ 'matchstr(lines[v:val], ''^\s*'')'
+    \ )
+    let trailing_whitespace = map(
+        \ range(len(lines)),
+        \ 'matchstr(lines[v:val], ''\s*$'')'
+    \ )
+    try
+       while !getchar(1) " any button to exit
+        " while 1 " any button to exit
+            let lines = map(
+                \ range(len(lines)),
+                \ '<SID>RotateLine(lines[v:val], leading_whitespace[v:val], trailing_whitespace[v:val])'
+            \ )
+            call setline(first_visible_line, lines)
+            redraw
+            sleep 50m
+        endwhile
+    finally
+        if &modified
+            silent undo
+        endif
+        call winrestview(saved_view)
+    endtry
+endfunction
+
+nnoremap <silent> <Plug>(RotateLines) :<C-u>call <SID>RotateLines()<CR>
+
+function! s:ScreenSaver(time)
+  let count = 1
+
+    let timer = timer_start(time, 's:StartRotateScreenSaver', 5 * 60 * 1000)
+endfunction
+
+function! s:StartRotateScreenSaver()
+  augroup ScreenSaver
+    au CursorHold * call s:RotateLines()
+  augroup END
+endfunction
+
+function! s:StopRotateScreenSaver()
+  augroup! ScreenSaver CursorHold *
+endfunction
+
+nmap \r <Plug>(RotateLines)
 "------------------------------------------- end of configs --------------------------------------------

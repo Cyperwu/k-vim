@@ -23,7 +23,7 @@
 " Initial Plugin 加载插件
 "==========================================
 
- autocmd! BufWritePost,BufEnter * Neomake
+autocmd! BufWritePost,BufEnter * Neomake
  " let g:neomake_verbose=2
 
 " 修改leader键
@@ -34,6 +34,7 @@ let g:mapleader = ','
 syntax on
 
 " install bundles
+ " if filereadable(expand("~/.vimrc.bundles_test"))
  if filereadable(expand("~/.vimrc.bundles"))
    source ~/.vimrc.bundles
  endif
@@ -571,6 +572,9 @@ nnoremap U <C-r>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+" ctrl-o new line
+" inoremap \nn <C-O>
+
 "==========================================
 " FileType Settings  文件类型设置
 "==========================================
@@ -699,6 +703,12 @@ highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
+function! SyncSyntax()
+  execute 'syntax sync fromstart'
+endfunction
+
+au BufWritePost <buffer> call SyncSyntax()
+
 
 " let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
@@ -714,3 +724,30 @@ let g:ctrlp_map = '<c-p>'
 "=====================================
 " easymotion
 "=====================================
+
+
+"=====================================
+" line break
+"=====================================
+" Insert a newline after each specified string (or before if use '!').
+" If no arguments, use previous search.
+command! -bang -nargs=* -range LineBreakAt <line1>,<line2>call LineBreakAt('<bang>', <f-args>)
+function! LineBreakAt(bang, ...) range
+  let save_search = @/
+  if empty(a:bang)
+    let before = ''
+    let after = '\ze.'
+    let repl = '&\r'
+  else
+    let before = '.\zs'
+    let after = ''
+    let repl = '\r&'
+  endif
+  let pat_list = map(deepcopy(a:000), "escape(v:val, '/\\.*$^~[')")
+  let find = empty(pat_list) ? @/ : join(pat_list, '\|')
+  let find = before . '\%(' . find . '\)' . after
+  " Example: 10,20s/\%(arg1\|arg2\|arg3\)\ze./&\r/ge
+  execute a:firstline . ',' . a:lastline . 's/'. find . '/' . repl . '/ge'
+  let @/ = save_search
+endfunction
+
