@@ -80,6 +80,16 @@ set nobackup
 set noswapfile
 
 
+" diff命令的设置
+" 使用histogram算法
+" algorithms are:
+"	myers      the default algorithm
+"	minimal    spend extra time to generate the
+"		   smallest possible diff
+"	patience   patience diff algorithm
+"	histogram  histogram diff algorithm
+
+set diffopt+=algorithm:histogram,iwhite
 
 
 " todo: remove this, use gundo
@@ -707,7 +717,7 @@ function! SyncSyntax()
   execute 'syntax sync fromstart'
 endfunction
 
-au BufWritePost <buffer> call SyncSyntax()
+autocmd! BufWritePost *.js call SyncSyntax()
 
 
 " let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
