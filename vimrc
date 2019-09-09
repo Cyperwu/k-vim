@@ -23,9 +23,6 @@
 " Initial Plugin 加载插件
 "==========================================
 
-autocmd! BufWritePost,BufEnter * Neomake
- " let g:neomake_verbose=2
-
 " 修改leader键
 let mapleader = ','
 let g:mapleader = ','
@@ -35,9 +32,9 @@ syntax on
 
 " install bundles
  " if filereadable(expand("~/.vimrc.bundles_test"))
- if filereadable(expand("~/.vimrc.bundles"))
+ " if filereadable(expand("~/.vimrc.bundles"))
    source ~/.vimrc.bundles
- endif
+ " endif
 
 " ensure ftdetect et al work by including this after the bundle stuff
 filetype plugin indent on

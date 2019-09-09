@@ -16,8 +16,8 @@ filetype off " required! turn off
 
 " inspired by spf13, 自定义需要的插件集合
 if !exists('g:bundle_groups')
-    " let g:bundle_groups=['python', 'javascript', 'markdown', 'html', 'css', 'tmux', 'beta', 'json', 'nginx', 'golang', 'ruby', 'less', 'php', 'coffeescript']
-    let g:bundle_groups=['python', 'javascript', 'markdown', 'html', 'css', 'tmux', 'beta', 'coffeescript']
+  " let g:bundle_groups=['python', 'javascript', 'markdown', 'html', 'css', 'tmux', 'beta', 'json', 'nginx', 'golang', 'ruby', 'less', 'php', 'coffeescript']
+  let g:bundle_groups=['python', 'javascript', 'markdown', 'html', 'css', 'tmux', 'beta', 'coffeescript']
 endif
 
 " ----------------------------------------------------------------------------
@@ -45,175 +45,175 @@ if dein#load_state('~/.vim/bundles')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
 
-" unix shell 命令的vim封装
-call dein#add('tpope/vim-eunuch')
-call dein#add('wsdjeg/dein-ui.vim')
+  " unix shell 命令的vim封装
+  call dein#add('tpope/vim-eunuch')
+  call dein#add('wsdjeg/dein-ui.vim')
 
-" jsDoc 用来写js文件的注释
- call dein#add('heavenshell/vim-jsdoc')
+  " jsDoc 用来写js文件的注释
+  call dein#add('heavenshell/vim-jsdoc')
 
-" typescript-vim
- call dein#add('leafgarland/typescript-vim')
+  " typescript-vim
+  call dein#add('leafgarland/typescript-vim')
 
-" eslint
- " call dein#add('mtscout6/syntastic-local-eslint.vim')
+  " eslint
+  " call dein#add('mtscout6/syntastic-local-eslint.vim')
 
-" vim-vue
- call dein#add('posva/vim-vue')
-"fzf
- " call dein#add('/usr/local/opt/fzf') |  call dein#add('junegunn/fzf.vim')
-call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+  " vim-vue
+  call dein#add('posva/vim-vue')
+  "fzf
+  " call dein#add('/usr/local/opt/fzf') |  call dein#add('junegunn/fzf.vim')
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
-" syntastic
-" call dein#add('scrooloose/syntastic')
+  " syntastic
+  " call dein#add('scrooloose/syntastic')
 
-" neomake
- call dein#add('neomake/neomake')
- call dein#add('jaawerth/nrun.vim')
-
-
-" Group dependencies, vim-snippets depends on ultisnips
-" 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
-" Snippets are separated from the engine. Add this if you want them:
- " call dein#add('SirVer/ultisnips')
- " call dein#add('honza/vim-snippets')
-
-" auto complete
-" 代码自动补全
- " call dein#add('zxqfl/tabnine-vim', {'build': './install.sh'})
- " call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'})
- " call dein#add('Shougo/deoplete.nvim')
-
- call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
- " call dein#add('neoclide/coc-imselect')
- " call dein#add('metalelf0/supertab')
- 
-
-" neovim 自动补全
- call dein#add('othree/jspc.vim')
-
-if !has('nvim')
-  call dein#add('roxma/nvim-yarp')
-  call dein#add('roxma/vim-hug-neovim-rpc')
-endif
-
-" 自动补全单引号，双引号等
- call dein#add('Raimondi/delimitMate')
-" 自动补全html/xml标签
- call dein#add('docunext/closetag.vim')
-
-" quick edit
-" 快速注释
- call dein#add('scrooloose/nerdcommenter')
-
-" 快速加入修改环绕字符
-" for repeat -> enhance surround.vim, . to repeat command
- call dein#add('tpope/vim-repeat') |  call dein#add('tpope/vim-surround')
-" trailingwhitespace
-" 快速去行尾空格 [, + <Space>]
- call dein#add('bronson/vim-trailing-whitespace')
-" easyalign
-" 快速赋值语句对齐
- call dein#add('junegunn/vim-easy-align')
-
-" quick movement
-" easymotion
-"更高效的移动 [,, + w/fx/h/j/k/l]
- call dein#add('Lokaltog/vim-easymotion')
-
-" 更高效的行内移动, f/F/t/T, 才触发
-" quickscope
- call dein#add('unblevable/quick-scope')
-
- call dein#add('vim-scripts/matchit.zip')
-" signature
-" 显示marks - 方便自己进行标记和跳转
-" m[a-zA-Z] add mark
-" '[a-zA-Z] go to mark
-" m<Space>  del all marks
-" m/        list all marks
- call dein#add('kshenoy/vim-signature')
-
-" quick selection and edit
-" expandregion
-" 选中区块
- call dein#add('terryma/vim-expand-region')
-" 多光标选中编辑
-" multiplecursors
- call dein#add('terryma/vim-multiple-cursors')
-
-" quick locate file or function
-" 文件搜索
-" change to https://github.com/ctrlpvim/ctrlp.vim
-" ctrlp ctrlpfunky
- call dein#add('ctrlpvim/ctrlp.vim') |  call dein#add('tacahiroy/ctrlp-funky')
-" ctrlsf
-" 类似sublimetext的搜索
-" In CtrlSF window:
-" 回车/o, 打开
-" t       在tab中打开(建议)
-" T - Lkie t but focus CtrlSF window instead of opened new tab.
-" q - Quit CtrlSF window.
- call dein#add('dyng/ctrlsf.vim')
-" incsearch
-"  call dein#add('haya14busa/incsearch.vim')
-
-" quick run
-" quickrun
-call dein#add('thinca/vim-quickrun')
-
-" git
-" fugitive
-call dein#add('tpope/vim-fugitive')
-" gitgutter
-call dein#add('airblade/vim-gitgutter')
-
-" gundo
-" edit history, 可以查看回到某个历史状态
-call dein#add('sjl/gundo.vim')
-
-" view
-" airline
-" 状态栏增强展示
-" call dein#add('vim-airline/vim-airline', {'rev': 'ada0ba8ae3eea778d165ec4794ee557df98fab87'})
-call dein#add('vim-airline/vim-airline-themes')
-" rainbow_parentheses
-" 括号显示增强
-call dein#add('kien/rainbow_parentheses.vim')
-" 主题 solarized
-" solarized
-call dein#add('altercation/vim-colors-solarized')
-" molokai
-" 主题 molokai
-call dein#add('tomasr/molokai')
+  " neomake
+  " call dein#add('neomake/neomake')
+  " call dein#add('jaawerth/nrun.vim')
 
 
-" nav
-" nerdtree nerdtreetabs
-call dein#add('scrooloose/nerdtree') | call dein#add('jistr/vim-nerdtree-tabs')
-" ctrlspace
-call dein#add('szw/vim-ctrlspace')
-" tagbar
-" call dein#add('majutsushi/tagbar')
+  " Group dependencies, vim-snippets depends on ultisnips
+  " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
+  " Snippets are separated from the engine. Add this if you want them:
+  " call dein#add('SirVer/ultisnips')
+  " call dein#add('honza/vim-snippets')
 
-" text object
-" 支持自定义文本对象
-call dein#add('kana/vim-textobj-user')
-" 增加行文本对象: l   dal yal cil
-call dein#add('kana/vim-textobj-line')
-" 增加文件文本对象: e   dae yae cie
-call dein#add('kana/vim-textobj-entire')
-" 增加缩进文本对象: i   dai yai cii - 相同缩进属于同一块
-call dein#add('kana/vim-textobj-indent')
+  " auto complete
+  " 代码自动补全
+  " call dein#add('zxqfl/tabnine-vim', {'build': './install.sh'})
+  " call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'})
+  call dein#add('Shougo/deoplete.nvim')
 
-if count(g:bundle_groups, 'tmux')
+  call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
+  " call dein#add('neoclide/coc-imselect')
+  call dein#add('metalelf0/supertab')
+
+
+  " neovim 自动补全
+  " call dein#add('othree/jspc.vim')
+
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+  " 自动补全单引号，双引号等
+  call dein#add('Raimondi/delimitMate')
+  " 自动补全html/xml标签
+  call dein#add('docunext/closetag.vim')
+
+  " quick edit
+  " 快速注释
+  call dein#add('scrooloose/nerdcommenter')
+
+  " 快速加入修改环绕字符
+  " for repeat -> enhance surround.vim, . to repeat command
+  call dein#add('tpope/vim-repeat') |  call dein#add('tpope/vim-surround')
+  " trailingwhitespace
+  " 快速去行尾空格 [, + <Space>]
+  call dein#add('bronson/vim-trailing-whitespace')
+  " easyalign
+  " 快速赋值语句对齐
+  call dein#add('junegunn/vim-easy-align')
+
+  " quick movement
+  " easymotion
+  "更高效的移动 [,, + w/fx/h/j/k/l]
+  call dein#add('Lokaltog/vim-easymotion')
+
+  " 更高效的行内移动, f/F/t/T, 才触发
+  " quickscope
+  call dein#add('unblevable/quick-scope')
+
+  call dein#add('vim-scripts/matchit.zip')
+  " signature
+  " 显示marks - 方便自己进行标记和跳转
+  " m[a-zA-Z] add mark
+  " '[a-zA-Z] go to mark
+  " m<Space>  del all marks
+  " m/        list all marks
+  call dein#add('kshenoy/vim-signature')
+
+  " quick selection and edit
+  " expandregion
+  " 选中区块
+  call dein#add('terryma/vim-expand-region')
+  " 多光标选中编辑
+  " multiplecursors
+  call dein#add('terryma/vim-multiple-cursors')
+
+  " quick locate file or function
+  " 文件搜索
+  " change to https://github.com/ctrlpvim/ctrlp.vim
+  " ctrlp ctrlpfunky
+  call dein#add('ctrlpvim/ctrlp.vim') |  call dein#add('tacahiroy/ctrlp-funky')
+  " ctrlsf
+  " 类似sublimetext的搜索
+  " In CtrlSF window:
+  " 回车/o, 打开
+  " t       在tab中打开(建议)
+  " T - Lkie t but focus CtrlSF window instead of opened new tab.
+  " q - Quit CtrlSF window.
+  call dein#add('dyng/ctrlsf.vim')
+  " incsearch
+  "  call dein#add('haya14busa/incsearch.vim')
+
+  " quick run
+  " quickrun
+  call dein#add('thinca/vim-quickrun')
+
+  " git
+  " fugitive
+  call dein#add('tpope/vim-fugitive')
+  " gitgutter
+  call dein#add('airblade/vim-gitgutter')
+
+  " gundo
+  " edit history, 可以查看回到某个历史状态
+  call dein#add('sjl/gundo.vim')
+
+  " view
+  " airline
+  " 状态栏增强展示
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  " rainbow_parentheses
+  " 括号显示增强
+  call dein#add('kien/rainbow_parentheses.vim')
+  " 主题 solarized
+  " solarized
+  call dein#add('altercation/vim-colors-solarized')
+  " molokai
+  " 主题 molokai
+  call dein#add('tomasr/molokai')
+
+
+  " nav
+  " nerdtree nerdtreetabs
+  call dein#add('scrooloose/nerdtree') | call dein#add('jistr/vim-nerdtree-tabs')
+  " ctrlspace
+  call dein#add('szw/vim-ctrlspace')
+  " tagbar
+  " call dein#add('majutsushi/tagbar')
+
+  " text object
+  " 支持自定义文本对象
+  call dein#add('kana/vim-textobj-user')
+  " 增加行文本对象: l   dal yal cil
+  call dein#add('kana/vim-textobj-line')
+  " 增加文件文本对象: e   dae yae cie
+  call dein#add('kana/vim-textobj-entire')
+  " 增加缩进文本对象: i   dai yai cii - 相同缩进属于同一块
+  call dein#add('kana/vim-textobj-indent')
+
+  if count(g:bundle_groups, 'tmux')
     " tmux
     " For tmux navigator Ctrl-hjkl
     call dein#add('christoomey/vim-tmux-navigator')
-endif
+  endif
 
-if count(g:bundle_groups, 'markdown')
+  if count(g:bundle_groups, 'markdown')
     call dein#add('plasticboy/vim-markdown')
     " https://github.com/suan/vim-instant-markdown
     " npm -g install instant-markdown-d
@@ -221,29 +221,29 @@ if count(g:bundle_groups, 'markdown')
     " let g:instant_markdown_slow = 1
     " let g:instant_markdown_autostart = 0
     " map <F12> :InstantMarkdownPreview<CR>
-endif
+  endif
 
-if count(g:bundle_groups, 'golang')
+  if count(g:bundle_groups, 'golang')
     " 1. vim a.go
     " 2. :GoInstallBinaries
     " vimgo
     call dein#add('fatih/vim-go')
-endif
+  endif
 
 
-if count(g:bundle_groups, 'python')
+  if count(g:bundle_groups, 'python')
     " for python.vim syntax highlight
     " pythonsyntax
     call dein#add('hdima/python-syntax')
     call dein#add('hynek/vim-python-pep8-indent')
     call dein#add('Glench/Vim-Jinja2-Syntax')
-endif
+  endif
 
-if count(g:bundle_groups, 'php')
+  if count(g:bundle_groups, 'php')
     call dein#add('spf13/PIV')
-endif
+  endif
 
-if count(g:bundle_groups, 'ruby')
+  if count(g:bundle_groups, 'ruby')
     call dein#add('vim-ruby/vim-ruby')
     call dein#add('tpope/vim-rails')
     " dir / dar
@@ -251,12 +251,12 @@ if count(g:bundle_groups, 'ruby')
 
     " 有bug, 和当前有冲突, 尚未解决, 不要打开
     " call dein#add('tpope/vim-endwise')
-endif
+  endif
 
-" if count(g:bundle_groups, 'javascript')
+  " if count(g:bundle_groups, 'javascript')
   " javascript
   " 注意: syntax这个插件要放前面
-	call dein#add('othree/yajs.vim')
+  call dein#add('othree/yajs.vim')
   " call dein#add('sheerun/vim-polyglot')
   " |
   " call dein#add('pangloss/vim-javascript')
@@ -274,46 +274,46 @@ endif
   " 安装完成后还需要在 bundle/tern_for_vim 下执行 npm install 安装依赖
   " see https://github.com/marijnh/tern_for_vim
   call dein#add('ternjs/tern_for_vim')
-  " call dein#add('carlitux/deoplete-ternjs')
-" endif
+  call dein#add('carlitux/deoplete-ternjs')
+  " endif
 
 
-if count(g:bundle_groups, 'coffeescript')
+  if count(g:bundle_groups, 'coffeescript')
     call dein#add('kchmck/vim-coffee-script')
-endif
+  endif
 
-if count(g:bundle_groups, 'json')
+  if count(g:bundle_groups, 'json')
     " json
     call dein#add('elzr/vim-json'), {'for': 'json'}
-endif
+  endif
 
-if count(g:bundle_groups, 'css')
+  if count(g:bundle_groups, 'css')
     " css
     " not work in iterm2 which termianl selection is not xterm-256, and it slow
     " call dein#add('ap/vim-css-color')
 
     " 这个有坑, see issue https://github.com/wklken/k-vim/issues/49
     " call dein#add('gorodinskiy/vim-coloresque')
-endif
+  endif
 
-if count(g:bundle_groups, 'less')
+  if count(g:bundle_groups, 'less')
     " ###### vim.less : less 自动更新##########
     " call dein#add('groenewege/vim-less')
     " autocmd BufWritePost *.less :!lessc % > %:p:r.css
-endif
+  endif
 
-if count(g:bundle_groups, 'html')
+  if count(g:bundle_groups, 'html')
     " ###### emmet HTML complete #########
     " call dein#add("mattn/emmet-vim")
-endif
+  endif
 
-" if count(g:bundle_groups, 'nginx')
-call dein#add('chr4/nginx.vim')
-" endif
+  " if count(g:bundle_groups, 'nginx')
+  call dein#add('chr4/nginx.vim')
+  " endif
 
 
-" this is just for beta version
-if count(g:bundle_groups, 'beta')
+  " this is just for beta version
+  if count(g:bundle_groups, 'beta')
     " indent
     call dein#add('nathanaelkane/vim-indent-guides')
     " <leader>ig to trigger
@@ -323,12 +323,12 @@ if count(g:bundle_groups, 'beta')
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
 
-endif
+  endif
 
-call dein#add('rhysd/reply.vim', {
-      \   'lazy' : 1,
-      \   'on_cmd' : ['Repl', 'ReplAuto'],
-      \ })
+  call dein#add('rhysd/reply.vim', {
+        \   'lazy' : 1,
+        \   'on_cmd' : ['Repl', 'ReplAuto'],
+        \ })
 
   " Required:
   call dein#end()
@@ -349,49 +349,49 @@ syntax enable
 " ################### 基础 ######################
 
 " --------- 自动补全
-" let g:tern#command = ["tern"]
-" let g:tern#arguments = ["--persistent"]
-" let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/tern'
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#sources#ternjs#timeout = 1
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/tern'
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#ternjs#timeout = 1
 
-" " Whether to include the types of the completions in the result data. Default: 0
-" let g:deoplete#sources#ternjs#types = 1
+" Whether to include the types of the completions in the result data. Default: 0
+let g:deoplete#sources#ternjs#types = 1
 
-" " Whether to include the distance (in scopes for variables, in prototypes for 
-" " properties) between the completions and the origin position in the result 
-" " data. Default: 0
-" let g:deoplete#sources#ternjs#depths = 1
+" Whether to include the distance (in scopes for variables, in prototypes for 
+" properties) between the completions and the origin position in the result 
+" data. Default: 0
+let g:deoplete#sources#ternjs#depths = 1
 
-" " Whether to include documentation strings (if found) in the result data.
-" " Default: 0
-" let g:deoplete#sources#ternjs#docs = 1
+" Whether to include documentation strings (if found) in the result data.
+" Default: 0
+let g:deoplete#sources#ternjs#docs = 1
 
 
-" " deoplete触发补全时使用的命令
-" " 这里对应js，其它语言另给一个key
-" let g:deoplete#omni#functions = {}
-" let g:deoplete#omni#functions.javascript = [
-  " \ 'tern#Complete',
-  " \ 'jspc#omni'
-" \]
+" deoplete触发补全时使用的命令
+" 这里对应js，其它语言另给一个key
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+      \ 'tern#Complete',
+      \ 'jspc#omni'
+      \]
 
-" set completeopt=longest,menuone,preview
-" let g:deoplete#sources = {}
-" let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs', 'buffer']
-" let g:tern#command = ['tern']
-" let g:tern#arguments = ['--persistent']
+set completeopt=longest,menuone,preview
+let g:deoplete#sources = {}
+let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs', 'buffer']
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
 
-" " 使用supertab来处理snippet和自动补全之间表现的不同
-" autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-" let g:UltiSnipsExpandTrigger="<C-j>"
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" 使用supertab来处理snippet和自动补全之间表现的不同
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-" let g:deoplete#sources#ternjs#filetypes = [
-                " \ 'jsx',
-                " \ 'javascript.jsx',
-                " \ 'vue',
-                " \ ]
+let g:deoplete#sources#ternjs#filetypes = [
+      \ 'jsx',
+      \ 'javascript.jsx',
+      \ 'vue',
+      \ ]
 
 "  ---------------
 
@@ -415,6 +415,9 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
+" change some hilight settings
+" hi CocHighlightText cterm=reverse ctermfg=193 ctermbg=16 gui=reverse guifg=#C4BE89 guibg=#000000
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -429,7 +432,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -457,7 +460,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -523,82 +526,85 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " ---------------
 
-" neomake 语法检测
-" When writing a buffer.
-call neomake#configure#automake('w')
-" When writing a buffer, and on normal mode changes (after 750ms).
-call neomake#configure#automake('nw', 750)
-" When reading a buffer (after 1s), and when writing.
-call neomake#configure#automake('rw', 1000)
-
-" let g:neomake_javascript_enabled_makers = ['eslint_d']
-" let g:neomake_javascript_enabled_makers = ['eslint', 'jshint']
-" let g:neomake_javascript_enabled_makers = ['eslint']
-
-" you can set your enabled makers globally (like below) or on the buffer level as part of an autocmd - see Neomake docs for details
-" let g:neomake_javascript_enabled_makers = ['eslint']
-" let g:neomake_javascript_enabled_makers = ['standard']
-" when switching/opening a JS buffer, set neomake's eslint path, and enable it as a maker
-" au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint_d')
-
-let g:neomake_logfile = '/tmp/neomake.log'
-" if findfile('.eslintrc', '.;') ==# ''
-  let g:neomake_javascript_enabled_makers = ['eslint']
-" else
-  " let g:neomake_javascript_enabled_makers = ['jshint']
-" endif
-" 这一个选项用来debug neomake
-" let g:neomake_verbose = 3
-" let g:neomake_list_height = 2
-" let g:neomake_open_list = 2
-let g:neomake_javascript_eslint_exe = '/usr/local/bin/eslint_d'
-" let g:neomake_javascript_enabled_makers = ['eslint', 'jshint']
-autocmd! BufWritePost *.js silent! Neomake
-
-
-" autocmd! FileType javascript, BufWritePost * Neomake
-
-let g:neomake_warning_sign = {
-  \ 'text': '>',
-  \ 'texthl': 'WarningMsg',
-  \ }
-
-let g:neomake_error_sign = {
-  \ 'text': '>>',
-  \ 'texthl': 'Statement',
-  \ }
-
-" TODO: 高亮错误位置，在当前配色下不好用，查不出啥办法，先关掉
-let g:neomake_highlight_columns = 1
-
-" hi SignColumn cterm=underline ctermfg=81 ctermbg=236
-" hi! SignColumn cterm=underline ctermfg=81 ctermbg=236
-" hi LineNr cterm=underline ctermfg=81 ctermbg=236
-" let ttt = neomake#utils#GetHighlight('SignColumn', 'bg')
-" echom(ttt)
-
-augroup my_neomake_signs
-  au!
-  autocmd ColorScheme *
-        \ hi NeomakeErrorSign ctermfg=white |
-        \ hi NeomakeWarningSign ctermfg=yellow
-augroup END
+"" neomake 语法检测
+"autocmd! BufWritePost,BufEnter * Neomake
+"" let g:neomake_verbose=2
+"
+"" When writing a buffer.
+"call neomake#configure#automake('w')
+"" When writing a buffer, and on normal mode changes (after 750ms).
+"call neomake#configure#automake('nw', 750)
+"" When reading a buffer (after 1s), and when writing.
+"call neomake#configure#automake('rw', 1000)
+"
+"" let g:neomake_javascript_enabled_makers = ['eslint_d']
+"" let g:neomake_javascript_enabled_makers = ['eslint', 'jshint']
+"" let g:neomake_javascript_enabled_makers = ['eslint']
+"
+"" you can set your enabled makers globally (like below) or on the buffer level as part of an autocmd - see Neomake docs for details
+"" let g:neomake_javascript_enabled_makers = ['eslint']
+"" let g:neomake_javascript_enabled_makers = ['standard']
+"" when switching/opening a JS buffer, set neomake's eslint path, and enable it as a maker
+"" au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint_d')
+"
+"let g:neomake_logfile = '/tmp/neomake.log'
+"" if findfile('.eslintrc', '.;') ==# ''
+"let g:neomake_javascript_enabled_makers = ['eslint']
+"" else
+"" let g:neomake_javascript_enabled_makers = ['jshint']
+"" endif
+"" 这一个选项用来debug neomake
+"" let g:neomake_verbose = 3
+"" let g:neomake_list_height = 2
+"" let g:neomake_open_list = 2
+"let g:neomake_javascript_eslint_exe = '/usr/local/bin/eslint_d'
+"" let g:neomake_javascript_enabled_makers = ['eslint', 'jshint']
+"autocmd! BufWritePost *.js silent! Neomake
+"
+"
+"" autocmd! FileType javascript, BufWritePost * Neomake
+"
+"let g:neomake_warning_sign = {
+"      \ 'text': '>',
+"      \ 'texthl': 'WarningMsg',
+"      \ }
+"
+"let g:neomake_error_sign = {
+"      \ 'text': '>>',
+"      \ 'texthl': 'Statement',
+"      \ }
+"
+"" TODO: 高亮错误位置，在当前配色下不好用，查不出啥办法，先关掉
+"let g:neomake_highlight_columns = 1
+"
+"" hi SignColumn cterm=underline ctermfg=81 ctermbg=236
+"" hi! SignColumn cterm=underline ctermfg=81 ctermbg=236
+"" hi LineNr cterm=underline ctermfg=81 ctermbg=236
+"" let ttt = neomake#utils#GetHighlight('SignColumn', 'bg')
+"" echom(ttt)
+"
+"augroup my_neomake_signs
+"  au!
+"  autocmd ColorScheme *
+"        \ hi NeomakeErrorSign ctermfg=white |
+"        \ hi NeomakeWarningSign ctermfg=yellow
+"augroup END
 
 " ,en ,ep to jump between errors
 function! <SID>LocationPrevious()
-    try
-        lprev
-    catch /^Vim\%((\a\+)\)\=:E553/
-        llast
-    endtry
+  try
+    lprev
+  catch /^Vim\%((\a\+)\)\=:E553/
+    llast
+  endtry
 endfunction
 
 function! <SID>LocationNext()
-    try
-        lnext
-    catch /^Vim\%((\a\+)\)\=:E553/
-        lfirst
-    endtry
+  try
+    lnext
+  catch /^Vim\%((\a\+)\)\=:E553/
+    lfirst
+  endtry
 endfunction
 
 nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
@@ -629,19 +635,19 @@ map <leader>us :UltiSnipsEdit<CR>
 
 " ctrl+j/k 进行选择
 " func! g:JInYCM()
-    " if pumvisible()
-        " return "\<C-n>"
-    " else
-        " return "\<c-j>"
-    " endif
+" if pumvisible()
+" return "\<C-n>"
+" else
+" return "\<c-j>"
+" endif
 " endfunction
 
 " func! g:KInYCM()
-    " if pumvisible()
-        " return "\<C-p>"
-    " else
-        " return "\<c-k>"
-    " endif
+" if pumvisible()
+" return "\<C-p>"
+" else
+" return "\<c-k>"
+" endif
 " endfunction
 " inoremap <c-j> <c-r>=g:JInYCM()<cr>
 " au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
@@ -664,36 +670,36 @@ let g:closetag_html_style=1
 
 "add---------
 " function! g:UltiSnips_Complete()
-    " call UltiSnips#ExpandSnippet()
-    " if g:ulti_expand_res == 0
-        " if pumvisible()
-            " return "\<C-n>"
-        " else
-            " call UltiSnips#JumpForwards()
-            " if g:ulti_jump_forwards_res == 0
-                " return "\<TAB>"
-            " endif
-        " endif
-    " endif
-    " return ""
+" call UltiSnips#ExpandSnippet()
+" if g:ulti_expand_res == 0
+" if pumvisible()
+" return "\<C-n>"
+" else
+" call UltiSnips#JumpForwards()
+" if g:ulti_jump_forwards_res == 0
+" return "\<TAB>"
+" endif
+" endif
+" endif
+" return ""
 " endfunction
 
 " function! g:UltiSnips_Reverse()
-    " call UltiSnips#JumpBackwards()
-    " if g:ulti_jump_backwards_res == 0
-        " return "\<C-P>"
-    " endif
+" call UltiSnips#JumpBackwards()
+" if g:ulti_jump_backwards_res == 0
+" return "\<C-P>"
+" endif
 
-    " return ""
+" return ""
 " endfunction
 
 
 " if !exists("g:UltiSnipsJumpForwardTrigger")
-    " let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
 " endif
 
 " if !exists("g:UltiSnipsJumpBackwardTrigger")
-    " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " endif
 
 " au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
@@ -715,7 +721,7 @@ map <leader><space> :FixWhitespace<cr>
 vmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 if !exists('g:easy_align_delimiters')
-    let g:easy_align_delimiters = {}
+  let g:easy_align_delimiters = {}
 endif
 let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
 " }}}
@@ -752,12 +758,12 @@ vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 " Extend the global default
 call expand_region#custom_text_objects({
-            \ 'a]' :1,
-            \ 'ab' :1,
-            \ 'aB' :1,
-            \ 'ii' :0,
-            \ 'ai' :0,
-            \ })
+      \ 'a]' :1,
+      \ 'ab' :1,
+      \ 'aB' :1,
+      \ 'ii' :0,
+      \ 'ai' :0,
+      \ })
 " }}}
 
 " multiplecursors {{{
@@ -776,9 +782,9 @@ let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>f :CtrlPMRU<CR>
 let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/](\.(git|hg|svn|rvm))|(node_modules|dist|third_party|bin)',
-            \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|png|gif|jpg|jpeg|lock)$',
-            \ }
+      \ 'dir':  '\v[\/](\.(git|hg|svn|rvm))|(node_modules|dist|third_party|bin)',
+      \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|png|gif|jpg|jpeg|lock)$',
+      \ }
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_match_window_bottom=1
 let g:ctrlp_max_height=15
@@ -819,16 +825,16 @@ let g:ctrlsf_confirm_save = 0
 " Note: cannot use <CR> or <C-m> for open
 " Use : <sapce> or <tab>
 let g:ctrlsf_mapping = {
-            \ "open"  : "<Space>",
-            \ "openb" : "O",
-            \ "tab"   : "t",
-            \ "tabb"  : "T",
-            \ "prevw" : "p",
-            \ "quit"  : "q",
-            \ "next"  : "<C-J>",
-            \ "prev"  : "<C-K>",
-            \ "pquit" : "q",
-            \ }
+      \ "open"  : "<Space>",
+      \ "openb" : "O",
+      \ "tab"   : "t",
+      \ "tabb"  : "T",
+      \ "prevw" : "p",
+      \ "quit"  : "q",
+      \ "next"  : "<C-J>",
+      \ "prev"  : "<C-K>",
+      \ "pquit" : "q",
+      \ }
 " }}}
 
 " git.  git操作还是习惯命令行,vim里面处理简单diff编辑操作
@@ -862,17 +868,22 @@ noremap <leader>h :GundoToggle<CR>
 " ################### 显示增强 ###################
 
 " airline {{{
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-" 是否打开tabline
-let g:airline#extensions#tabline#enabled = 1
+ let g:airline_theme="luna"
+
+ "这个是安装字体后 必须设置此项"
+ let g:airline_powerline_fonts = 1
+
+ if !exists('g:airline_symbols')
+ let g:airline_symbols = {}
+ endif
+ let g:airline_left_sep = '▶'
+ let g:airline_left_alt_sep = '❯'
+ let g:airline_right_sep = '◀'
+ let g:airline_right_alt_sep = '❮'
+ let g:airline_symbols.linenr = '¶'
+ let g:airline_symbols.branch = '⎇'
+ " 是否打开tabline
+ let g:airline#extensions#tabline#enabled = 1
 " }}}
 
 
@@ -881,22 +892,22 @@ let g:airline#extensions#tabline#enabled = 1
 " 不加入这行, 防止黑色括号出现, 很难识别
 " \ ['black',       'SeaGreen3'],
 let g:rbpt_colorpairs = [
-            \ ['brown',       'RoyalBlue3'],
-            \ ['Darkblue',    'SeaGreen3'],
-            \ ['darkgray',    'DarkOrchid3'],
-            \ ['darkgreen',   'firebrick3'],
-            \ ['darkcyan',    'RoyalBlue3'],
-            \ ['darkred',     'SeaGreen3'],
-            \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['brown',       'firebrick3'],
-            \ ['gray',        'RoyalBlue3'],
-            \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['Darkblue',    'firebrick3'],
-            \ ['darkgreen',   'RoyalBlue3'],
-            \ ['darkcyan',    'SeaGreen3'],
-            \ ['darkred',     'DarkOrchid3'],
-            \ ['red',         'firebrick3'],
-            \ ]
+      \ ['brown',       'RoyalBlue3'],
+      \ ['Darkblue',    'SeaGreen3'],
+      \ ['darkgray',    'DarkOrchid3'],
+      \ ['darkgreen',   'firebrick3'],
+      \ ['darkcyan',    'RoyalBlue3'],
+      \ ['darkred',     'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['brown',       'firebrick3'],
+      \ ['gray',        'RoyalBlue3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['Darkblue',    'firebrick3'],
+      \ ['darkgreen',   'RoyalBlue3'],
+      \ ['darkcyan',    'SeaGreen3'],
+      \ ['darkred',     'DarkOrchid3'],
+      \ ['red',         'firebrick3'],
+      \ ]
 
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
@@ -965,47 +976,47 @@ hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=
 " " let g:tagbar_show_visibility = 1
 " " for ruby
 " let g:tagbar_type_ruby = {
-            " \ 'kinds' : [
-            " \ 'm:modules',
-            " \ 'c:classes',
-            " \ 'd:describes',
-            " \ 'C:contexts',
-            " \ 'f:methods',
-            " \ 'F:singleton methods'
-            " \ ]
-            " \ }
+" \ 'kinds' : [
+" \ 'm:modules',
+" \ 'c:classes',
+" \ 'd:describes',
+" \ 'C:contexts',
+" \ 'f:methods',
+" \ 'F:singleton methods'
+" \ ]
+" \ }
 
 " go语言的tagbar配置
 " 1. install gotags 'go get -u github.com/jstemmer/gotags'
 " 2. make sure `gotags` in you shell PATH, you can call check it with `which gotags`
 " for gotags. work with tagbar
 " let g:tagbar_type_go = {
-            " \ 'ctagstype' : 'go',
-            " \ 'kinds'     : [
-            " \ 'p:package',
-            " \ 'i:imports:1',
-            " \ 'c:constants',
-            " \ 'v:variables',
-            " \ 't:types',
-            " \ 'n:interfaces',
-            " \ 'w:fields',
-            " \ 'e:embedded',
-            " \ 'm:methods',
-            " \ 'r:constructor',
-            " \ 'f:functions'
-            " \ ],
-            " \ 'sro' : '.',
-            " \ 'kind2scope' : {
-            " \ 't' : 'ctype',
-            " \ 'n' : 'ntype'
-            " \ },
-            " \ 'scope2kind' : {
-            " \ 'ctype' : 't',
-            " \ 'ntype' : 'n'
-            " \ },
-            " \ 'ctagsbin'  : 'gotags',
-            " \ 'ctagsargs' : '-sort -silent'
-            " \ }
+" \ 'ctagstype' : 'go',
+" \ 'kinds'     : [
+" \ 'p:package',
+" \ 'i:imports:1',
+" \ 'c:constants',
+" \ 'v:variables',
+" \ 't:types',
+" \ 'n:interfaces',
+" \ 'w:fields',
+" \ 'e:embedded',
+" \ 'm:methods',
+" \ 'r:constructor',
+" \ 'f:functions'
+" \ ],
+" \ 'sro' : '.',
+" \ 'kind2scope' : {
+" \ 't' : 'ctype',
+" \ 'n' : 'ntype'
+" \ },
+" \ 'scope2kind' : {
+" \ 'ctype' : 't',
+" \ 'ntype' : 'n'
+" \ },
+" \ 'ctagsbin'  : 'gotags',
+" \ 'ctagsargs' : '-sort -silent'
+" \ }
 " }}}
 
 
@@ -1013,10 +1024,10 @@ hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=
 
 " quickrun {{{
 let g:quickrun_config = {
-            \   "_" : {
-            \       "outputter" : "message",
-            \   },
-            \}
+      \   "_" : {
+      \       "outputter" : "message",
+      \   },
+      \}
 
 let g:quickrun_no_default_key_mappings = 1
 nmap <Leader>r <Plug>(quickrun)
@@ -1125,13 +1136,13 @@ let g:Lf_HideHelp = 1
 let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
 
 let g:Lf_NormalMap = {
-	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
-	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
-	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
-	\ }
+      \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+      \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+      \ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+      \ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+      \ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+      \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+      \ }
 
 
 " neoformat
@@ -1139,8 +1150,8 @@ let g:Lf_NormalMap = {
 let g:neoformat_enabled_javascript = ['prettier']
 " 保存文件前自动格式化
 " augroup fmt
-  " autocmd!
-  " autocmd BufWritePre *.js try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
+" autocmd!
+" autocmd BufWritePre *.js try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
 " augroup END
 
 " FastFold
@@ -1165,49 +1176,49 @@ let g:php_folding = 1
 " Press \r to start rotating lines and <C-c> (Control+c) to stop.
 
 function! s:RotateString(string)
-    let split_string = split(a:string, '\zs')
-    return join(split_string[-1:] + split_string[:-2], '')
+  let split_string = split(a:string, '\zs')
+  return join(split_string[-1:] + split_string[:-2], '')
 endfunction
 
 function! s:RotateLine(line, leading_whitespace, trailing_whitespace)
-    return substitute(
+  return substitute(
         \ a:line,
         \ '^\(' . a:leading_whitespace . '\)\(.\{-}\)\(' . a:trailing_whitespace . '\)$',
         \ '\=submatch(1) . <SID>RotateString(submatch(2)) . submatch(3)',
         \ ''
-    \ )
+        \ )
 endfunction
 
 function! s:RotateLines()
-    let saved_view = winsaveview()
-    let first_visible_line = line('w0')
-    let last_visible_line = line('w$')
-    let lines = getline(first_visible_line, last_visible_line)
-    let leading_whitespace = map(
+  let saved_view = winsaveview()
+  let first_visible_line = line('w0')
+  let last_visible_line = line('w$')
+  let lines = getline(first_visible_line, last_visible_line)
+  let leading_whitespace = map(
         \ range(len(lines)),
         \ 'matchstr(lines[v:val], ''^\s*'')'
-    \ )
-    let trailing_whitespace = map(
+        \ )
+  let trailing_whitespace = map(
         \ range(len(lines)),
         \ 'matchstr(lines[v:val], ''\s*$'')'
-    \ )
-    try
-       while !getchar(1) " any button to exit
-        " while 1 " any button to exit
-            let lines = map(
-                \ range(len(lines)),
-                \ '<SID>RotateLine(lines[v:val], leading_whitespace[v:val], trailing_whitespace[v:val])'
+        \ )
+  try
+    while !getchar(1) " any button to exit
+      " while 1 " any button to exit
+      let lines = map(
+            \ range(len(lines)),
+            \ '<SID>RotateLine(lines[v:val], leading_whitespace[v:val], trailing_whitespace[v:val])'
             \ )
-            call setline(first_visible_line, lines)
-            redraw
-            sleep 50m
-        endwhile
-    finally
-        if &modified
-            silent undo
-        endif
-        call winrestview(saved_view)
-    endtry
+      call setline(first_visible_line, lines)
+      redraw
+      sleep 50m
+    endwhile
+  finally
+    if &modified
+      silent undo
+    endif
+    call winrestview(saved_view)
+  endtry
 endfunction
 
 nnoremap <silent> <Plug>(RotateLines) :<C-u>call <SID>RotateLines()<CR>
@@ -1215,7 +1226,7 @@ nnoremap <silent> <Plug>(RotateLines) :<C-u>call <SID>RotateLines()<CR>
 function! s:ScreenSaver(time)
   let count = 1
 
-    let timer = timer_start(time, 's:StartRotateScreenSaver', 5 * 60 * 1000)
+  let timer = timer_start(time, 's:StartRotateScreenSaver', 5 * 60 * 1000)
 endfunction
 
 function! s:StartRotateScreenSaver()
