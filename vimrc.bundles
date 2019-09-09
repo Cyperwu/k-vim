@@ -83,11 +83,11 @@ if dein#load_state('~/.vim/bundles')
   " 代码自动补全
   " call dein#add('zxqfl/tabnine-vim', {'build': './install.sh'})
   " call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'})
-  call dein#add('Shougo/deoplete.nvim')
+  " call dein#add('Shougo/deoplete.nvim')
 
   call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
   " call dein#add('neoclide/coc-imselect')
-  call dein#add('metalelf0/supertab')
+  " call dein#add('metalelf0/supertab')
 
 
   " neovim 自动补全
@@ -274,7 +274,7 @@ if dein#load_state('~/.vim/bundles')
   " 安装完成后还需要在 bundle/tern_for_vim 下执行 npm install 安装依赖
   " see https://github.com/marijnh/tern_for_vim
   call dein#add('ternjs/tern_for_vim')
-  call dein#add('carlitux/deoplete-ternjs')
+  " call dein#add('carlitux/deoplete-ternjs')
   " endif
 
 
@@ -347,53 +347,6 @@ syntax enable
 "End dein Scripts-------------------------
 
 " ################### 基础 ######################
-
-" --------- 自动补全
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/tern'
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#ternjs#timeout = 1
-
-" Whether to include the types of the completions in the result data. Default: 0
-let g:deoplete#sources#ternjs#types = 1
-
-" Whether to include the distance (in scopes for variables, in prototypes for 
-" properties) between the completions and the origin position in the result 
-" data. Default: 0
-let g:deoplete#sources#ternjs#depths = 1
-
-" Whether to include documentation strings (if found) in the result data.
-" Default: 0
-let g:deoplete#sources#ternjs#docs = 1
-
-
-" deoplete触发补全时使用的命令
-" 这里对应js，其它语言另给一个key
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-      \ 'tern#Complete',
-      \ 'jspc#omni'
-      \]
-
-set completeopt=longest,menuone,preview
-let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs', 'buffer']
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
-
-" 使用supertab来处理snippet和自动补全之间表现的不同
-autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:UltiSnipsExpandTrigger="<C-j>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-let g:deoplete#sources#ternjs#filetypes = [
-      \ 'jsx',
-      \ 'javascript.jsx',
-      \ 'vue',
-      \ ]
-
-"  ---------------
 
 " --------------- coc.nvim
 " if hidden is not set, TextEdit might fail.
@@ -669,41 +622,6 @@ let g:closetag_html_style=1
 " }}}
 
 "add---------
-" function! g:UltiSnips_Complete()
-" call UltiSnips#ExpandSnippet()
-" if g:ulti_expand_res == 0
-" if pumvisible()
-" return "\<C-n>"
-" else
-" call UltiSnips#JumpForwards()
-" if g:ulti_jump_forwards_res == 0
-" return "\<TAB>"
-" endif
-" endif
-" endif
-" return ""
-" endfunction
-
-" function! g:UltiSnips_Reverse()
-" call UltiSnips#JumpBackwards()
-" if g:ulti_jump_backwards_res == 0
-" return "\<C-P>"
-" endif
-
-" return ""
-" endfunction
-
-
-" if !exists("g:UltiSnipsJumpForwardTrigger")
-" let g:UltiSnipsJumpForwardTrigger = "<tab>"
-" endif
-
-" if !exists("g:UltiSnipsJumpBackwardTrigger")
-" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-" endif
-
-" au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
-" au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 "--------------
 
 " ################### 快速编码 ###################

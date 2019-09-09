@@ -31,10 +31,10 @@ let g:mapleader = ','
 syntax on
 
 " install bundles
- " if filereadable(expand("~/.vimrc.bundles_test"))
- " if filereadable(expand("~/.vimrc.bundles"))
-   source ~/.vimrc.bundles
- " endif
+" if filereadable(expand("~/.vimrc.bundles_test"))
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
 
 " ensure ftdetect et al work by including this after the bundle stuff
 filetype plugin indent on
@@ -757,4 +757,3 @@ function! LineBreakAt(bang, ...) range
   execute a:firstline . ',' . a:lastline . 's/'. find . '/' . repl . '/ge'
   let @/ = save_search
 endfunction
-
