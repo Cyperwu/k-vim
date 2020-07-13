@@ -25,129 +25,108 @@ endif
 " dein bundle control, command model
 " ----------------------------------------------------------------------------
 
-"dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
-
-" Required:
-if dein#load_state('~/.vim/bundles')
-  call dein#begin('~/.vim/bundles')
-
-  " Let dein manage dein
-  " Required:
-  call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
+  call plug#begin('~/.vim/plugged')
 
   " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
 
   " unix shell 命令的vim封装
-  call dein#add('tpope/vim-eunuch')
-  call dein#add('wsdjeg/dein-ui.vim')
+  Plug 'tpope/vim-eunuch'
 
   " jsDoc 用来写js文件的注释
-  call dein#add('heavenshell/vim-jsdoc')
+  Plug 'Cyperwu/vim-jsdoc'
+  " 2.0.0 requires vim8 only
+  " Plug 'heavenshell/vim-jsdoc', { 'build': 'make install' }
 
   " typescript-vim
-  call dein#add('leafgarland/typescript-vim')
+  Plug 'leafgarland/typescript-vim'
 
-  " eslint
-  " call dein#add('mtscout6/syntastic-local-eslint.vim')
 
   " vim-vue
-  call dein#add('posva/vim-vue')
+  Plug 'posva/vim-vue'
   "fzf
-  " call dein#add('/usr/local/opt/fzf') |  call dein#add('junegunn/fzf.vim')
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-
-  " syntastic
-  " call dein#add('scrooloose/syntastic')
-
-  " neomake
-  " call dein#add('neomake/neomake')
-  " call dein#add('jaawerth/nrun.vim')
+  " Plug '/usr/local/opt/fzf' |  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf', { 'build': './install --all', 'merged': 0 }
+  Plug 'junegunn/fzf.vim', { 'depends': 'fzf' }
 
 
   " Group dependencies, vim-snippets depends on ultisnips
   " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
   " Snippets are separated from the engine. Add this if you want them:
-  " call dein#add('SirVer/ultisnips')
-  " call dein#add('honza/vim-snippets')
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
-  " auto complete
-  " 代码自动补全
-  " call dein#add('zxqfl/tabnine-vim', {'build': './install.sh'})
-  " call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'})
-  " call dein#add('Shougo/deoplete.nvim')
+  " coc 工具包
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-  call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
-  " call dein#add('neoclide/coc-imselect')
-  " call dein#add('metalelf0/supertab')
+  " Plug 'neoclide/coc-imselect'
+  Plug 'metalelf0/supertab'
 
-
-  " neovim 自动补全
-  " call dein#add('othree/jspc.vim')
 
   if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
   endif
 
   " 自动补全单引号，双引号等
-  call dein#add('Raimondi/delimitMate')
+  Plug 'Raimondi/delimitMate'
   " 自动补全html/xml标签
-  call dein#add('docunext/closetag.vim')
+  Plug 'docunext/closetag.vim'
 
   " quick edit
   " 快速注释
-  call dein#add('scrooloose/nerdcommenter')
+  Plug 'scrooloose/nerdcommenter'
 
   " 快速加入修改环绕字符
   " for repeat -> enhance surround.vim, . to repeat command
-  call dein#add('tpope/vim-repeat') |  call dein#add('tpope/vim-surround')
+  Plug 'tpope/vim-repeat' |  Plug 'tpope/vim-surround'
   " trailingwhitespace
   " 快速去行尾空格 [, + <Space>]
-  call dein#add('bronson/vim-trailing-whitespace')
+  Plug 'bronson/vim-trailing-whitespace'
   " easyalign
   " 快速赋值语句对齐
-  call dein#add('junegunn/vim-easy-align')
+  Plug 'junegunn/vim-easy-align'
 
   " quick movement
   " easymotion
   "更高效的移动 [,, + w/fx/h/j/k/l]
-  call dein#add('Lokaltog/vim-easymotion')
+  Plug 'Lokaltog/vim-easymotion'
 
   " 更高效的行内移动, f/F/t/T, 才触发
   " quickscope
-  call dein#add('unblevable/quick-scope')
+  Plug 'unblevable/quick-scope'
 
-  call dein#add('vim-scripts/matchit.zip')
+  Plug 'vim-scripts/matchit.zip'
   " signature
   " 显示marks - 方便自己进行标记和跳转
   " m[a-zA-Z] add mark
   " '[a-zA-Z] go to mark
   " m<Space>  del all marks
   " m/        list all marks
-  call dein#add('kshenoy/vim-signature')
+  Plug 'kshenoy/vim-signature'
+
+  " leaderF
+  Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
   " quick selection and edit
   " expandregion
   " 选中区块
-  call dein#add('terryma/vim-expand-region')
+  Plug 'terryma/vim-expand-region'
   " 多光标选中编辑
   " multiplecursors
-  call dein#add('terryma/vim-multiple-cursors')
+  Plug 'terryma/vim-multiple-cursors'
 
   " quick locate file or function
   " 文件搜索
   " change to https://github.com/ctrlpvim/ctrlp.vim
   " ctrlp ctrlpfunky
-  call dein#add('ctrlpvim/ctrlp.vim') |  call dein#add('tacahiroy/ctrlp-funky')
+  Plug 'ctrlpvim/ctrlp.vim' |  Plug 'tacahiroy/ctrlp-funky'
   " ctrlsf
   " 类似sublimetext的搜索
   " In CtrlSF window:
@@ -155,167 +134,130 @@ if dein#load_state('~/.vim/bundles')
   " t       在tab中打开(建议)
   " T - Lkie t but focus CtrlSF window instead of opened new tab.
   " q - Quit CtrlSF window.
-  call dein#add('dyng/ctrlsf.vim')
+  Plug 'dyng/ctrlsf.vim'
   " incsearch
-  "  call dein#add('haya14busa/incsearch.vim')
+  "  Plug 'haya14busa/incsearch.vim'
 
   " quick run
   " quickrun
-  call dein#add('thinca/vim-quickrun')
+  Plug 'thinca/vim-quickrun'
 
   " git
   " fugitive
-  call dein#add('tpope/vim-fugitive')
+  Plug 'tpope/vim-fugitive'
   " gitgutter
-  call dein#add('airblade/vim-gitgutter')
+  Plug 'airblade/vim-gitgutter'
 
   " gundo
   " edit history, 可以查看回到某个历史状态
-  call dein#add('sjl/gundo.vim')
+  Plug 'sjl/gundo.vim'
 
   " view
   " airline
   " 状态栏增强展示
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('vim-airline/vim-airline-themes')
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'edkolev/tmuxline.vim'
   " rainbow_parentheses
   " 括号显示增强
-  call dein#add('kien/rainbow_parentheses.vim')
+  Plug 'kien/rainbow_parentheses.vim'
   " 主题 solarized
   " solarized
-  call dein#add('altercation/vim-colors-solarized')
+  Plug 'altercation/vim-colors-solarized'
   " molokai
   " 主题 molokai
-  call dein#add('tomasr/molokai')
-
+  Plug 'tomasr/molokai'
 
   " nav
   " nerdtree nerdtreetabs
-  call dein#add('scrooloose/nerdtree') | call dein#add('jistr/vim-nerdtree-tabs')
-  " ctrlspace
-  call dein#add('szw/vim-ctrlspace')
+  Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
   " tagbar
-  " call dein#add('majutsushi/tagbar')
+  " Plug 'majutsushi/tagbar'
 
   " text object
   " 支持自定义文本对象
-  call dein#add('kana/vim-textobj-user')
+  Plug 'kana/vim-textobj-user'
   " 增加行文本对象: l   dal yal cil
-  call dein#add('kana/vim-textobj-line')
+  Plug 'kana/vim-textobj-line'
   " 增加文件文本对象: e   dae yae cie
-  call dein#add('kana/vim-textobj-entire')
+  Plug 'kana/vim-textobj-entire'
   " 增加缩进文本对象: i   dai yai cii - 相同缩进属于同一块
-  call dein#add('kana/vim-textobj-indent')
-
-  if count(g:bundle_groups, 'tmux')
-    " tmux
-    " For tmux navigator Ctrl-hjkl
-    call dein#add('christoomey/vim-tmux-navigator')
-  endif
-
-  if count(g:bundle_groups, 'markdown')
-    call dein#add('plasticboy/vim-markdown')
-    " https://github.com/suan/vim-instant-markdown
-    " npm -g install instant-markdown-d
-    " call dein#add('suan/vim-instant-markdown')
-    " let g:instant_markdown_slow = 1
-    " let g:instant_markdown_autostart = 0
-    " map <F12> :InstantMarkdownPreview<CR>
-  endif
-
-  if count(g:bundle_groups, 'golang')
-    " 1. vim a.go
-    " 2. :GoInstallBinaries
-    " vimgo
-    call dein#add('fatih/vim-go')
-  endif
-
+  Plug 'kana/vim-textobj-indent'
 
   if count(g:bundle_groups, 'python')
     " for python.vim syntax highlight
     " pythonsyntax
-    call dein#add('hdima/python-syntax')
-    call dein#add('hynek/vim-python-pep8-indent')
-    call dein#add('Glench/Vim-Jinja2-Syntax')
+    Plug 'hdima/python-syntax'
+    Plug 'hynek/vim-python-pep8-indent'
+    Plug 'Glench/Vim-Jinja2-Syntax'
   endif
 
-  if count(g:bundle_groups, 'php')
-    call dein#add('spf13/PIV')
-  endif
 
-  if count(g:bundle_groups, 'ruby')
-    call dein#add('vim-ruby/vim-ruby')
-    call dein#add('tpope/vim-rails')
-    " dir / dar
-    call dein#add('nelstrom/vim-textobj-rubyblock')
-
-    " 有bug, 和当前有冲突, 尚未解决, 不要打开
-    " call dein#add('tpope/vim-endwise')
-  endif
-
-  " if count(g:bundle_groups, 'javascript')
   " javascript
   " 注意: syntax这个插件要放前面
-  call dein#add('othree/yajs.vim')
-  " call dein#add('sheerun/vim-polyglot')
+  Plug 'othree/yajs.vim'
+  " Plug 'sheerun/vim-polyglot'
   " |
-  " call dein#add('pangloss/vim-javascript')
-  call dein#add('polpo/vim-html-js-indent')
-  " call dein#add('jelera/vim-javascript-syntax')
+  " Plug 'pangloss/vim-javascript'
+  Plug 'polpo/vim-html-js-indent'
+  " Plug 'jelera/vim-javascript-syntax'
 
   " TODO: jquery? for, remove or keep
-  " call dein#add('othree/javascript-libraries-syntax.vim')
+  " Plug 'othree/javascript-libraries-syntax.vim'
   let g:used_javascript_libs = 'jquery,underscore,vue,react'
 
   " js 代码格式化
-  call dein#add('sbdchd/neoformat')
+  Plug 'sbdchd/neoformat'
+
+
+  Plug 'rust-lang/rust.vim'
 
   " for javascript 自动补全, 配合YCM, 需要安装全局环境的（非nvm中) node.js&npm
   " 安装完成后还需要在 bundle/tern_for_vim 下执行 npm install 安装依赖
   " see https://github.com/marijnh/tern_for_vim
-  call dein#add('ternjs/tern_for_vim')
-  " call dein#add('carlitux/deoplete-ternjs')
+  " Plug 'ternjs/tern_for_vim'
+  " Plug 'carlitux/deoplete-ternjs'
   " endif
 
 
   if count(g:bundle_groups, 'coffeescript')
-    call dein#add('kchmck/vim-coffee-script')
+    Plug 'kchmck/vim-coffee-script'
   endif
 
   if count(g:bundle_groups, 'json')
     " json
-    call dein#add('elzr/vim-json'), {'for': 'json'}
+    Plug 'elzr/vim-json', {'for': 'json'}
   endif
 
   if count(g:bundle_groups, 'css')
     " css
     " not work in iterm2 which termianl selection is not xterm-256, and it slow
-    " call dein#add('ap/vim-css-color')
+    " Plug 'ap/vim-css-color'
 
     " 这个有坑, see issue https://github.com/wklken/k-vim/issues/49
-    " call dein#add('gorodinskiy/vim-coloresque')
+    " Plug 'gorodinskiy/vim-coloresque'
   endif
 
   if count(g:bundle_groups, 'less')
     " ###### vim.less : less 自动更新##########
-    " call dein#add('groenewege/vim-less')
+    " Plug 'groenewege/vim-less'
     " autocmd BufWritePost *.less :!lessc % > %:p:r.css
   endif
 
   if count(g:bundle_groups, 'html')
     " ###### emmet HTML complete #########
-    " call dein#add("mattn/emmet-vim")
+    " Plug "mattn/emmet-vim"
   endif
 
   " if count(g:bundle_groups, 'nginx')
-  call dein#add('chr4/nginx.vim')
+  Plug 'chr4/nginx.vim'
   " endif
 
 
   " this is just for beta version
   if count(g:bundle_groups, 'beta')
     " indent
-    call dein#add('nathanaelkane/vim-indent-guides')
+    Plug 'nathanaelkane/vim-indent-guides'
     " <leader>ig to trigger
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
@@ -325,26 +267,20 @@ if dein#load_state('~/.vim/bundles')
 
   endif
 
-  call dein#add('rhysd/reply.vim', {
+  Plug 'rhysd/reply.vim', {
         \   'lazy' : 1,
         \   'on_cmd' : ['Repl', 'ReplAuto'],
-        \ })
+        \ }
+
+  " vim wiki
+  Plug 'vimwiki/vimwiki'
 
   " Required:
-  call dein#end()
-  call dein#save_state()
-endif
+  call plug#end()
 
-" Required:
 filetype plugin indent on
 syntax enable
 
-" If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
-
-"End dein Scripts-------------------------
 
 " ################### 基础 ######################
 
@@ -374,7 +310,7 @@ set signcolumn=yes
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? "\<C-y>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
@@ -414,6 +350,7 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 " autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * if ! coc#util#has_float() | call CocActionAsync('doHover') | endif 
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -477,7 +414,15 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+" Coc浮动窗口滚动
+nnoremap <expr><Up> coc#util#has_float() ? coc#util#float_scroll(1) : "\<Up>"
+nnoremap <expr><Down> coc#util#has_float() ? coc#util#float_scroll(0) : "\<Down>"
+
 " ---------------
+
+" coc-snippets
 
 "" neomake 语法检测
 "autocmd! BufWritePost,BufEnter * Neomake
@@ -759,7 +704,6 @@ let g:ctrlsf_mapping = {
 
 " fugitive {{{
 " :Gdiff  :Gstatus :Gvsplit
-set diffopt+=vertical
 nnoremap <leader>ge :Gdiff<CR>
 " not ready to open
 " <leader>gb maps to :Gblame<CR>
@@ -786,7 +730,7 @@ noremap <leader>h :GundoToggle<CR>
 " ################### 显示增强 ###################
 
 " airline {{{
- let g:airline_theme="luna"
+ " let g:airline_theme="luna"
 
  "这个是安装字体后 必须设置此项"
  let g:airline_powerline_fonts = 1
@@ -794,16 +738,28 @@ noremap <leader>h :GundoToggle<CR>
  if !exists('g:airline_symbols')
  let g:airline_symbols = {}
  endif
- let g:airline_left_sep = '▶'
- let g:airline_left_alt_sep = '❯'
- let g:airline_right_sep = '◀'
- let g:airline_right_alt_sep = '❮'
- let g:airline_symbols.linenr = '¶'
- let g:airline_symbols.branch = '⎇'
- " 是否打开tabline
+ " 如果没安装字体，下面部分的字符是无法显示的，
+ " 安装字体具体看 https://github.com/powerline/fonts
+ let g:airline_left_sep = ''
+ let g:airline_left_alt_sep = ''
+ let g:airline_right_sep = ''
+ let g:airline_right_alt_sep = ''
+ let g:airline_symbols.branch = ''
+ let g:airline_symbols.readonly = ''
+ let g:airline_symbols.linenr = ''
+ " " 是否打开tabline
  let g:airline#extensions#tabline#enabled = 1
 " }}}
 
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'b'    : '#W',
+      \'c'    : '#H',
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'x'    : '%a',
+      \'y'    : ['%R', '%a', '%Y'],
+      \'z'    : '#H' }
 
 
 " rainbow_parentheses {{{
@@ -837,14 +793,6 @@ au Syntax * RainbowParenthesesLoadBraces
 
 
 " ################### 显示增强-主题 ###################"
-
-" solarized {{{
-let g:solarized_termtrans=1
-let g:solarized_contrast="normal"
-let g:solarized_visibility="normal"
-" let g:solarized_termcolors=256
-" }}}
-
 " molokai {{{
 " monokai原始背景色
 let g:molokai_original = 1
@@ -854,7 +802,6 @@ let g:rehash256 = 1
 " ################### 快速导航 ###################
 
 " nerdtree nerdtreetabs {{{
-map <leader>n :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 "close vim if the only window left open is a NERDTree
@@ -863,8 +810,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
 
-
-" nerdtreetabs
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " 关闭同步
 let g:nerdtree_tabs_synchronize_view=0
@@ -873,16 +818,6 @@ let g:nerdtree_tabs_synchronize_focus=0
 " thank to @ListenerRi, see https://github.com/wklken/k-vim/issues/165
 let g:nerdtree_tabs_open_on_console_startup=0
 let g:nerdtree_tabs_open_on_gui_startup=0
-" }}}
-
-
-" Vim Workspace Controller
-" ctrlspace {{{
-let g:airline_exclude_preview = 1
-hi CtrlSpaceSelected guifg=#586e75 guibg=#eee8d5 guisp=#839496 gui=reverse,bold ctermfg=10 ctermbg=7 cterm=reverse,bold
-hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
-hi CtrlSpaceSearch   guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
-hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=reverse ctermfg=12 ctermbg=8
 " }}}
 
 
@@ -904,39 +839,6 @@ hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=
 " \ ]
 " \ }
 
-" go语言的tagbar配置
-" 1. install gotags 'go get -u github.com/jstemmer/gotags'
-" 2. make sure `gotags` in you shell PATH, you can call check it with `which gotags`
-" for gotags. work with tagbar
-" let g:tagbar_type_go = {
-" \ 'ctagstype' : 'go',
-" \ 'kinds'     : [
-" \ 'p:package',
-" \ 'i:imports:1',
-" \ 'c:constants',
-" \ 'v:variables',
-" \ 't:types',
-" \ 'n:interfaces',
-" \ 'w:fields',
-" \ 'e:embedded',
-" \ 'm:methods',
-" \ 'r:constructor',
-" \ 'f:functions'
-" \ ],
-" \ 'sro' : '.',
-" \ 'kind2scope' : {
-" \ 't' : 'ctype',
-" \ 'n' : 'ntype'
-" \ },
-" \ 'scope2kind' : {
-" \ 'ctype' : 't',
-" \ 'ntype' : 'n'
-" \ },
-" \ 'ctagsbin'  : 'gotags',
-" \ 'ctagsargs' : '-sort -silent'
-" \ }
-" }}}
-
 
 " ################### 语言相关 ###################
 
@@ -956,24 +858,6 @@ map <F10> :QuickRun<CR>
 " pythonsyntax {{{
 let python_highlight_all = 1
 " }}}
-
-
-" vimgo {{{
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-let g:go_fmt_fail_silently = 1
-" let g:go_fmt_command = "goimports"
-" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-" }}}
-
-" markdown {{{
-let g:vim_markdown_folding_disabled=1
-" }}}
-
 
 " javascript {{{
 " pangloss/vim-javascript
@@ -1003,55 +887,67 @@ omap <leader><tab> <plug>(fzf-maps-o)
 " command! -bang -nargs=* Rgg call fzf#vim#grep('rg %s --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 " set grepprg=rg\ --vimgrep
 
+" add :BD for removing multiple buffers
+" only works for nvim
+" see https://github.com/junegunn/fzf.vim/pull/733
+if (has('nvim'))
+  function! s:list_buffers()
+    redir => list
+    silent ls
+    redir END
+    return split(list, "\n")
+  endfunction
+
+  function! s:delete_buffers(lines)
+    execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+  endfunction
+
+  function! s:delete_buffer_one(line)
+    execute 'bwipeout' split(a:line)[0]
+  endfunction
+
+  command! BD call fzf#run(fzf#wrap({
+        \ 'source': s:list_buffers(),
+        \ 'sink*': { lines -> s:delete_buffers(lines) },
+        \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+        \ }))
+endif
+
 map <tab> :Buffers<CR>
 " ####### temp #######
-
-" beta {{{
-" python code format
-" format all file
-autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-" format select block
-" autocmd FileType python vnoremap <leader>y :!yapf<Cr>
-
-" Plug 'mindriot101/vim-yapf'
-" scriptencoding utf-8
-" let g:yapf_style = "google"
-" let g:yapf_style = "pep8"
-" setenv PYTHONIOENCODING UTF-8
-" nnoremap <leader>y :call Yapf()<cr>
-" }}}
 
 " Plug 'Cyperwu/CommentReader'
 
 " jsdoc自动写文档
 nmap <silent> <leader>do <Plug>(jsdoc)
 
+" let g:jsdoc_lehre_path = '/usr/local/bin/lehre'
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_additional_descriptions = 1
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_user_defined_tags = {
       \ '@author': 'Cyper',
-      \ '@date': strftime('%Y-%m-%d'),
       \}
-
-" ######### tern_for_vim ########
-" 重命名变量
-nmap R :TernRename<cr>
-nmap <leader>jd :TernDef<cr>
-" ######### tpope/vim-eunuch ########
-" 重命名文件
-nmap <leader>R :call RenameFile()<cr>
-function! RenameFile()
-  let file_name = expand('%:t')
-  exe 'Rename  'input('Rename ', file_name)
+let jsdoc_timestamp_dict = {}
+function jsdoc_timestamp_dict.date()
+  return strftime('%c')
 endfunction
+let g:jsdoc_user_defined_tags_dy = jsdoc_timestamp_dict
 
 " LeaderF
 noremap <leader>t :LeaderfFunction!<cr>
 let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
-let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
+let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1, 'Buffer': 1}
+
+let g:Lf_WindowPosition = 'popup'
+
+let g:Lf_PreviewInPopup = 1
+
+let g:Lf_PreviewHorizontalPosition = 'right'
+
+let g:Lf_PopupPreviewPosition = 'bottom'
 
 let g:Lf_NormalMap = {
       \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
@@ -1159,3 +1055,4 @@ endfunction
 
 nmap \r <Plug>(RotateLines)
 "------------------------------------------- end of configs --------------------------------------------
+

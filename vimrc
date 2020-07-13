@@ -86,7 +86,8 @@ set noswapfile
 "	patience   patience diff algorithm
 "	histogram  histogram diff algorithm
 
-set diffopt+=algorithm:histogram,iwhite
+" set diffopt+=algorithm:histogram,iwhite
+set diffopt+=vertical
 
 
 " todo: remove this, use gundo
@@ -105,7 +106,8 @@ set diffopt+=algorithm:histogram,iwhite
 set wildignore=*.swp,*.bak,*.pyc,*.class,.svn
 
 " 突出显示当前列
-set cursorcolumn!
+" 这个选项有性能问题
+" set cursorcolumn!
 " 突出显示当前行
 set cursorline!
 
@@ -352,6 +354,10 @@ nnoremap gk k
 nnoremap j gj
 nnoremap gj j
 
+map [[ ?{<CR>w99[{
+map ][ /}<CR>b99]}
+map ]] j0[[%/\{<CR>
+map [] k$][%?}<CR>
 " F1 - F6 设置
 
 " F1 废弃这个键,防止调出系统帮助
@@ -444,7 +450,7 @@ cnoremap <C-e> <End>
 map <space> /
 " 进入搜索Use sane regexes"
 nnoremap / /\v
-vnoremap / y/\v<c-r>"<cr>
+vnoremap / y?\<<c-r>"\><cr>
 
 " Keep search pattern at the center of the screen.
 nnoremap <silent> n nzz
@@ -473,6 +479,7 @@ nnoremap ]b :bnext<cr>
 noremap <left> :bp<CR>
 noremap <right> :bn<CR>
 
+nnoremap <C-l> <C-I>
 
 " tab 操作
 " http://vim.wikia.com/wiki/Alternative_tab_navigation
@@ -591,6 +598,8 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
 autocmd BufRead,BufNewFile *.part set filetype=html
+autocmd BufRead,BufNewFile *.ejs set filetype=html
+autocmd BufRead,BufNewFile *.wiki set filetype=wiki
 " disable showmatch when use > in php
 au BufWinEnter *.php set mps-=<:>
 
@@ -684,15 +693,11 @@ if has("gui_running")
     set t_Co=256
 endif
 
-
-
 " theme主题
 set background=dark
 set t_Co=256
 
-" colorscheme solarized
 colorscheme molokai
-" colorscheme desert
 
 
 " 设置标记一列的背景颜色和数字一行颜色一致
