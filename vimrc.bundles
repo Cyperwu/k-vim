@@ -279,7 +279,20 @@ endif
         \ }
 
   " vim wiki
-  Plug 'vimwiki/vimwiki'
+  " Plug 'vimwiki/vimwiki'
+
+
+  " markdown
+  " markdown 工具包
+  Plug 'sidofc/mkdx'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  " markdown 的列表插件
+  Plug 'dkarter/bullets.vim'
+  Plug 'godlygeek/tabular'
+  " Plug 'plasticboy/vim-markdown'
+  " markdown-toc
+  " 方便生成markdown的目录
+  Plug 'mzlogin/vim-markdown-toc'
 
   " Required:
   call plug#end()
@@ -928,7 +941,21 @@ call defx#custom#option('_', {
 " \ }
 
 
-" ################### 语言相关 ###################
+" ################### 语言相关 ###################"
+
+" markdown
+let g:bullets_enabled_file_types = [
+      \ 'markdown',
+      \ 'gitcommit',
+      \ 'yml'
+      \]
+
+let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
+                        \ 'enter': { 'shift': 1 },
+                        \ 'links': { 'external': { 'enable': 1 },  'fragment': { 'complete': 0 } } ,
+                        \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
+                        \ 'tab': { 'enable': 0},
+                        \ 'fold': { 'enable': 1 } }
 
 " quickrun {{{
 let g:quickrun_config = {
