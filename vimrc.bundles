@@ -299,6 +299,9 @@ endif
 
   " ctags
   Plug 'ludovicchabant/vim-gutentags'
+
+  " 自动切换输入法
+  Plug 'lyokha/vim-xkbswitch'
   " Required:
   call plug#end()
 
@@ -1107,6 +1110,12 @@ let g:r_syntax_folding = 1
 let g:rust_fold = 1
 let g:php_folding = 1
 
+"" xkbswitch
+let g:XkbSwitchEnabled = 1
+" 需要先安装这个库https://github.com/vovkasm/input-source-switcher
+let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
+" 默认键盘layout
+let g:XkbSwitchNLayout = 'com.apple.keylayout.US'
 " Press \r to start rotating lines and <C-c> (Control+c) to stop.
 
 function! s:RotateString(string)
