@@ -351,9 +351,6 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
-
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -381,7 +378,7 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 " autocmd CursorHold * silent call CocActionAsync('highlight')
-autocmd CursorHold * if ! coc#util#has_float() | call CocActionAsync('doHover') | endif 
+" autocmd CursorHold * if ! coc#util#has_float() | call CocActionAsync('doHover') | endif
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
