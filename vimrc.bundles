@@ -297,6 +297,8 @@ endif
   " smoothie scroll
   Plug 'psliwka/vim-smoothie'
 
+  " ctags
+  Plug 'ludovicchabant/vim-gutentags'
   " Required:
   call plug#end()
 
