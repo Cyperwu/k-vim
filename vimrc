@@ -171,6 +171,10 @@ set laststatus=2
 set number
 " 取消换行
 set nowrap
+set breakindent
+set breakindentopt=sbr
+" Unicode curly arrow, space
+set showbreak=↪
 
 " 括号配对情况, 跳转并高亮一下匹配的括号
 set showmatch
@@ -240,6 +244,9 @@ set ttyfast
 set re=1
 set lazyredraw
 
+set synmaxcol=128
+syntax sync minlines=256
+
 " 00x增减数字时使用十进制
 set nrformats=
 
@@ -293,10 +300,9 @@ set formatoptions+=B
 "==========================================
 " others 其它设置
 "==========================================
-" vimrc文件修改之后自动加载, windows
-autocmd! bufwritepost _vimrc source %
 " vimrc文件修改之后自动加载, linux
 autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost .vimrc.bundles source %
 
 " 自动补全配置
 " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
@@ -389,6 +395,15 @@ set pastetoggle=<F5>            "    when in insert mode, press <F5> to go to
                                 "    paste mode, where you can paste mass data
                                 "    that won't be autoindented
 
+" F12 显示光标下的高亮颜色配置
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+map <F12> :call SynStack()<CR>
 " disbale paste mode when leaving insert mode
 au InsertLeave * set nopaste
 
@@ -436,6 +451,9 @@ cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
+" 输入模式下的调整
+imap <C-a> <Home>
+imap <C-e> <End>
 
 " 搜索相关
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
@@ -659,6 +677,7 @@ set background=dark
 set t_Co=256
 
 colorscheme molokai
+" hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
 
 
 " 设置标记一列的背景颜色和数字一行颜色一致
