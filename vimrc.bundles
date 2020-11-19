@@ -801,6 +801,20 @@ noremap <leader>h :GundoToggle<CR>
  let g:airline_symbols.linenr = ''
  " " 是否打开tabline
  let g:airline#extensions#tabline#enabled = 1
+ let g:airline#extensions#coc#enabled = 1
+ let g:airline#extensions#hunks#coc_git = 1
+
+ function! GetCurrentFunctionSymbol() abort
+   return get(b:, 'coc_current_function', '')
+ endfunction
+
+ function! GetSecC() abort
+   return get(g:, 'airline_section_c', '')
+ endfunction
+
+ " let g:airline_section_c = '%{get(g:, ''airline_section_c'', '''')} %{GetCurrentFunctionSymbol()}'
+ " let g:airline_section_c = '%{GetCurrentFunctionSymbol()} '
+
 " }}}
 
 let g:tmuxline_preset = {
