@@ -294,6 +294,9 @@ endif
   " 方便生成markdown的目录
   Plug 'mzlogin/vim-markdown-toc'
 
+  " smoothie scroll
+  Plug 'psliwka/vim-smoothie'
+
   " Required:
   call plug#end()
 
