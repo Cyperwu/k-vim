@@ -403,14 +403,6 @@ endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 
-
-" 分屏窗口移动, Smart way to move between windows
-" map <C-j> <C-W>j
-" map <C-k> <C-W>k
-" map <C-h> <C-W>h
-" map <C-l> <C-W>l
-
-
 " http://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
@@ -468,7 +460,6 @@ nnoremap * #
 
 " for # indent, python文件中输入新行时#号注释不切回行首
 autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
-
 
 " tab/buffer相关
 
@@ -566,9 +557,6 @@ nnoremap <C-y> 2<C-y>
 "nmap t o<ESC>k
 "nmap T O<ESC>j
 
-map f <Nop>
-map f  <Plug>(easymotion-overwin-f)
-
 " Quickly close the current window
 nnoremap <leader>q :q<CR>
 
@@ -644,33 +632,6 @@ if has("autocmd")
   endif
 endif
 
-"==========================================
-" TEMP 设置, 尚未确定要不要
-"==========================================
-
-" tmux
-" function! WrapForTmux(s)
-"   if !exists('$TMUX')
-"     return a:s
-"   endif
-"
-"   let tmux_start = "\<Esc>Ptmux;"
-"   let tmux_end = "\<Esc>\\"
-"
-"   return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
-" endfunction
-"
-" let &t_SI .= WrapForTmux("\<Esc>[?2004h")
-" let &t_EI .= WrapForTmux("\<Esc>[?2004l")
-
-" allows cursor change in tmux mode
-" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" if exists('$TMUX')
-    " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    " let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-" endif
-
 
 "==========================================
 " Theme Settings  主题设置
@@ -721,8 +682,6 @@ endfunction
 
 autocmd! BufWritePost *.js call SyncSyntax()
 
-
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "=====================================
 "ctrlP
