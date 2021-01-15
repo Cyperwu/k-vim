@@ -602,6 +602,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " 具体编辑文件类型的一般设置，比如不要 tab 等
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+" 不同类型的文件采用不同缩进
+autocmd FileType c,cpp,java set tabstop=4 shiftwidth=4 softtabstop=4 expandtab ai
+
 autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
 autocmd BufRead,BufNewFile *.part set filetype=html
 autocmd BufRead,BufNewFile *.ejs set filetype=html
@@ -739,4 +742,14 @@ function! LineBreakAt(bang, ...) range
   " Example: 10,20s/\%(arg1\|arg2\|arg3\)\ze./&\r/ge
   execute a:firstline . ',' . a:lastline . 's/'. find . '/' . repl . '/ge'
   let @/ = save_search
+endfunction
+
+function! ToggleVerbose()
+    if !&verbose
+        set verbosefile=~/logs/vim/verbose.log
+        set verbose=15
+    else
+        set verbose=0
+        set verbosefile=
+    endif
 endfunction

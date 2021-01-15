@@ -225,6 +225,8 @@ endif
   " Plug 'carlitux/deoplete-ternjs'
   " endif
 
+  " Java
+  Plug 'starcraftman/vim-eclim'
 
   if count(g:bundle_groups, 'coffeescript')
     Plug 'kchmck/vim-coffee-script'
