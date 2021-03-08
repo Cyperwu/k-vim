@@ -298,7 +298,7 @@ endif
   Plug 'ludovicchabant/vim-gutentags'
 
   " 自动切换输入法
-  Plug 'lyokha/vim-xkbswitch'
+  " Plug 'lyokha/vim-xkbswitch'
 
   Plug 'liuchengxu/vista.vim'
 
@@ -456,8 +456,18 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
 " Coc浮动窗口滚动
-nnoremap <expr><Up> coc#util#has_float() ? coc#util#float_scroll(1) : "\<Up>"
-nnoremap <expr><Down> coc#util#has_float() ? coc#util#float_scroll(0) : "\<Down>"
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" coc-java
+" call coc#config('java.jdt.ls.vmargs', '-javaagent:/Users/wujiajie/wujiajie/lombok/lombok.jar')
+" "java.jdt.ls.vmargs": "-javaagent:/Users/wujiajie/lombok/lombok.jar"
 
 " ---------------
 
@@ -893,8 +903,8 @@ function! s:defx_my_settings() abort
         \ defx#do_action('toggle_ignored_files')
   nnoremap <silent><buffer><expr> ;
         \ defx#do_action('repeat')
-  nnoremap <silent><buffer><expr> h
-        \ defx#do_action('cd', ['..'])
+  " nnoremap <silent><buffer><expr> h
+        " \ defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> ~
         \ defx#do_action('cd')
   nnoremap <silent><buffer><expr> q
